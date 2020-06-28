@@ -26,7 +26,7 @@ const MineSlot = ({ slotProps,
 
     const renderSlot = () => {
         if(slotProps.clicked && slotProps.mined) {setSlotDisplay("M")}
-        else if(slotProps.clicked && !slotProps.mined) {setSlotDisplay("E")}
+        else if(slotProps.clicked && !slotProps.mined) {setSlotDisplay(slotProps.numberOfNeighboringMines)}
         // {slotProps.disabled && "D"}
         // {slotProps.clicked && !slotProps.mined && renderNumberOfNeighboringMines()}
     }

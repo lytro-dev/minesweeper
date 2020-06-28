@@ -19,14 +19,32 @@ const MineFieldBeginner = () => {
 
     const distributeMines = () => {
         let numberOfMinesToDistribute = gameVariants.beginner.numberOfMines
+        const slotsArrayCopy = [...slotsArray]
         while(numberOfMinesToDistribute>0) {
-            let randomRow = slotsArray[Math.floor(Math.random()*slotsArray.length)]
+            let randomRow = slotsArrayCopy[Math.floor(Math.random()*slotsArrayCopy.length)]
             let randomSlot = randomRow[Math.floor(Math.random()*randomRow.length)]
             if(!randomSlot.clicked && !randomSlot.mined) {
                 randomSlot.mined = true
                 numberOfMinesToDistribute--
             }         
         }
+        slotsArrayCopy.forEach(row => {
+            row.forEach(slot => {
+                if(!slot.mined) {
+                    let count = 0
+                    if(slotsArrayCopy?.[slot.yCoordinate]?.[slot.xCoordinate-1]?.mined) {count++}
+                    if(slotsArrayCopy?.[slot.yCoordinate]?.[slot.xCoordinate+1]?.mined) {count++}
+                    if(slotsArrayCopy?.[slot.yCoordinate-1]?.[slot.xCoordinate-1]?.mined) {count++}
+                    if(slotsArrayCopy?.[slot.yCoordinate-1]?.[slot.xCoordinate]?.mined) {count++}
+                    if(slotsArrayCopy?.[slot.yCoordinate-1]?.[slot.xCoordinate+1]?.mined) {count++}
+                    if(slotsArrayCopy?.[slot.yCoordinate+1]?.[slot.xCoordinate-1]?.mined) {count++}
+                    if(slotsArrayCopy?.[slot.yCoordinate+1]?.[slot.xCoordinate]?.mined) {count++}
+                    if(slotsArrayCopy?.[slot.yCoordinate+1]?.[slot.xCoordinate+1]?.mined) {count++}
+                    slot.numberOfNeighboringMines = count
+                }
+            })
+        })
+        setSlotsArray(slotsArrayCopy)
         setFirstSlotClicked(true)
     }
 
@@ -40,7 +58,8 @@ const MineFieldBeginner = () => {
                     yCoordinate: y,
                     mined: false,
                     clicked: false,
-                    disabled: false
+                    disabled: false,
+                    numberOfNeighboringMines: 0
                 })
                 
             }
