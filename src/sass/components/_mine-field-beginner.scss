@@ -1,0 +1,6 @@
+.mine-field-beginner {
+    display: grid;
+    grid-template-columns: repeat(9, 5rem);
+    gap: .2rem;
+    justify-content: center;
+}

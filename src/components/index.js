@@ -1,5 +1,7 @@
-import MineField from './MineField'
+import MineFieldBeginner from './MineFieldBeginner'
+import MineSlot from './MineSlot'
 
 export {
-    MineField
+    MineFieldBeginner,
+    MineSlot
 }

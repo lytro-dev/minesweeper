@@ -1,12 +1,12 @@
 import React from 'react'
 
 import './App.css'
-import { MineField } from './components'
+import { MineFieldBeginner } from './components'
 
 const App = () => {
   return (
     <div className="App">
-      <MineField />
+      <MineFieldBeginner />
     </div>
   );
 }
