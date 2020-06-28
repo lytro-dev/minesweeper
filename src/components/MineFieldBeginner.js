@@ -48,6 +48,17 @@ const MineFieldBeginner = () => {
         }
         setSlotsArray(slotsArray)
     }
+
+    const revealAllSlots = () => {
+        const slotsArrayCopy = [...slotsArray]
+        slotsArrayCopy.forEach(
+            row => row.forEach(
+                slot => {
+                    slot.clicked = true
+                }
+        ))
+        setSlotsArray(slotsArrayCopy)
+    }
     
     const renderMineSlots = () => {
         return slotsArray.map(row => 
@@ -56,7 +67,8 @@ const MineFieldBeginner = () => {
                                         slotsArray={slotsArray}
                                         firstSlotClicked={firstSlotClicked}
                                         setFirstSlotClicked={setFirstSlotClicked}
-                                        distributeMines={distributeMines}/>))
+                                        distributeMines={distributeMines}
+                                        revealAllSlots={revealAllSlots}/>))
     }
 
     return(<div className="mine-field-beginner">

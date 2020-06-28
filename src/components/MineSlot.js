@@ -1,11 +1,16 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 const MineSlot = ({ slotProps, 
                     slotsArray,
                     firstSlotClicked,
-                    distributeMines}) => {
+                    distributeMines,
+                    revealAllSlots}) => {
 
     const [slotDisplay, setSlotDisplay] = useState(null)
+
+    useEffect(()=> {
+        renderSlot()
+    }, [slotProps.clicked])
 
     const handleSlotClick = () => {
         slotProps.clicked = true;
@@ -13,14 +18,15 @@ const MineSlot = ({ slotProps,
             distributeMines()
         }
         renderSlot()
+        if(slotProps.mined) {
+            revealAllSlots()
+        }
         console.log(slotsArray)
     }
 
     const renderSlot = () => {
         if(slotProps.clicked && slotProps.mined) {setSlotDisplay("M")}
         else if(slotProps.clicked && !slotProps.mined) {setSlotDisplay("E")}
-        // {(slotProps.clicked && slotProps.mined) && <div>M</div>}
-        // {(slotProps.clicked && !slotProps.mined) && <div>E</div>}
         // {slotProps.disabled && "D"}
         // {slotProps.clicked && !slotProps.mined && renderNumberOfNeighboringMines()}
     }
