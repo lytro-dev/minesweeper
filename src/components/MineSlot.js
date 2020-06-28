@@ -1,8 +1,25 @@
 import React from 'react'
 
-const MineSlot = () => {
-    return(<div className="mine-slot">
+const MineSlot = ({slotProps: {xCoordinate, yCoordinate, mined, clicked, disabled}, 
+                    slotsArray,
+                    firstSlotClicked,
+                    distributeMines}) => {
 
+    const handleSlotClick = () => {
+        console.log("handling click")
+        if(!firstSlotClicked) {
+            distributeMines()
+        }
+    }
+
+    const renderNumberOfNeighboringMines = () => {
+        console.log('rendering')
+    }
+
+    return(<div className="mine-slot" onClick={handleSlotClick}>
+        {clicked && mined && "M"}
+        {disabled && "D"}
+        {clicked && !mined && renderNumberOfNeighboringMines()}
     </div>)
 }
 
