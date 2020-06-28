@@ -1,0 +1,35 @@
+//Theme
+$color-background-primary: #2d545e;
+$color-background-secondary: #12343b;
+$color-primary: #e1b382;
+$color-secondary: #c89666;
+$color-title-text: #c89666;
+$color-main-text: #c89666;
+$color-gray: #dddfd4;
+
+$overall-background: #151617;
+
+@font-face {
+    font-family: 'newpatagonia-normal';
+    src: url('./fonts/NewPatagonia/NewPatagonia-Normal.otf') format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'newpatagonia-regular';
+    src: url('./fonts/NewPatagonia/NewPatagonia-Regular.otf') format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+//Fonts https://www.haleyfiege.fun/fonts
+$font-main-text: 'newpatagonia-normal', 'newpatagonia-regular', sans-serif;
+$font-title-text: 'newpatagonia-normal', 'newpatagonia-regular', sans-serif;
+
+
+//Responsive breakpoints
+$bp-x-large: 50em;      //800px
+$bp-large: 46.8em;     //748.8px
+$bp-medium: 37em;      //592px
+$bp-small: 25em;     //592px

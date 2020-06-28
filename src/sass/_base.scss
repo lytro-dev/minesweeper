@@ -1,0 +1,21 @@
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-main-text;
+    background-color: $overall-background;
+    color: $color-primary;
+    font-weight: 400;
+    line-height: 1.7;
+    padding: 3rem;
+    font-size: 1.5rem;
+    box-sizing: border-box; 
+    width: 100%;
+}
+
+.app {
+    display:grid;
+    grid-template-columns: [full-start] 1fr [content-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [content-end] 1fr [full-end];
+}
