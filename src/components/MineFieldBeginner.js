@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import MineSlot from './MineSlot'
 
 const MineFieldBeginner = () => {
     const [firstSlotClicked, setFirstSlotClicked] = useState(false)
+    const [slotsArray, setSlotsArray] = useState([])
     const gameVariants = Object.freeze({
         beginner: {
             width: 9,
@@ -11,10 +12,12 @@ const MineFieldBeginner = () => {
             numberOfMines: 10
         }
     })
-    const slotsArray = []
+    
+    useEffect(()=>{
+        buildSlotsArray()
+    }, [])
 
     const distributeMines = () => {
-        console.log("distributing mines")
         let numberOfMinesToDistribute = gameVariants.beginner.numberOfMines
         while(numberOfMinesToDistribute>0) {
             let randomRow = slotsArray[Math.floor(Math.random()*slotsArray.length)]
@@ -24,11 +27,11 @@ const MineFieldBeginner = () => {
                 numberOfMinesToDistribute--
             }         
         }
-        console.log(slotsArray)
         setFirstSlotClicked(true)
     }
 
     const buildSlotsArray = () => {
+        const slotsArray = []
         for(let y = 0; y <gameVariants.beginner.width; y++) {
             let rowArray = []
             for(let x = 0; x < gameVariants.beginner.height; x++){    
@@ -43,9 +46,8 @@ const MineFieldBeginner = () => {
             }
             slotsArray.push(rowArray)
         }
+        setSlotsArray(slotsArray)
     }
-
-    buildSlotsArray()
     
     const renderMineSlots = () => {
         return slotsArray.map(row => 

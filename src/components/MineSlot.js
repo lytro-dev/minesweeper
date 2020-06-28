@@ -1,15 +1,28 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-const MineSlot = ({slotProps: {xCoordinate, yCoordinate, mined, clicked, disabled}, 
+const MineSlot = ({ slotProps, 
                     slotsArray,
                     firstSlotClicked,
                     distributeMines}) => {
 
+    const [slotDisplay, setSlotDisplay] = useState(null)
+
     const handleSlotClick = () => {
-        console.log("handling click")
+        slotProps.clicked = true;
         if(!firstSlotClicked) {
             distributeMines()
         }
+        renderSlot()
+        console.log(slotsArray)
+    }
+
+    const renderSlot = () => {
+        if(slotProps.clicked && slotProps.mined) {setSlotDisplay("M")}
+        else if(slotProps.clicked && !slotProps.mined) {setSlotDisplay("E")}
+        // {(slotProps.clicked && slotProps.mined) && <div>M</div>}
+        // {(slotProps.clicked && !slotProps.mined) && <div>E</div>}
+        // {slotProps.disabled && "D"}
+        // {slotProps.clicked && !slotProps.mined && renderNumberOfNeighboringMines()}
     }
 
     const renderNumberOfNeighboringMines = () => {
@@ -17,9 +30,7 @@ const MineSlot = ({slotProps: {xCoordinate, yCoordinate, mined, clicked, disable
     }
 
     return(<div className="mine-slot" onClick={handleSlotClick}>
-        {clicked && mined && "M"}
-        {disabled && "D"}
-        {clicked && !mined && renderNumberOfNeighboringMines()}
+        {slotDisplay}
     </div>)
 }
 
