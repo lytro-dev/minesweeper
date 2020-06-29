@@ -1,4 +1,4 @@
-class MineSlotObj {
+class Cell {
     constructor(xCoordinate, yCoordinate) {
         this.xCoordinate = xCoordinate
         this.yCoordinate = yCoordinate
@@ -7,7 +7,13 @@ class MineSlotObj {
         this.disabled = false
         this.numberOfNeighboringMines = 0   
     }
+
+    revealSlot() {
+        if(!this.numberOfNeighboringMines) {
+
+        }
+    }
 }
 
 
-export default MineSlotObj
+export default Cell
