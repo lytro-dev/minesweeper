@@ -4,7 +4,8 @@ const MineSlot = ({ slotProps,
                     slotsArray,
                     firstSlotClicked,
                     distributeMines,
-                    revealAllSlots}) => {
+                    revealAllSlots,
+                    revealNeighboringSlots}) => {
 
     const [slotDisplay, setSlotDisplay] = useState(null)
 
@@ -21,6 +22,9 @@ const MineSlot = ({ slotProps,
         if(slotProps.mined) {
             revealAllSlots()
         }
+        if(!slotProps.numberOfNeighboringMines) {
+            revealNeighboringSlots(slotProps.xCoordinate, slotProps.yCoordinate)
+        }
         console.log(slotsArray)
     }
 
@@ -29,10 +33,6 @@ const MineSlot = ({ slotProps,
         else if(slotProps.clicked && !slotProps.mined) {setSlotDisplay(slotProps.numberOfNeighboringMines)}
         // {slotProps.disabled && "D"}
         // {slotProps.clicked && !slotProps.mined && renderNumberOfNeighboringMines()}
-    }
-
-    const renderNumberOfNeighboringMines = () => {
-        console.log('rendering')
     }
 
     return(<div className="mine-slot" onClick={handleSlotClick}>

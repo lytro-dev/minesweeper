@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 
 import MineSlot from './MineSlot'
+import {MineSlotObj} from '../utils'
 
 const MineFieldBeginner = () => {
     const [firstSlotClicked, setFirstSlotClicked] = useState(false)
@@ -59,6 +60,7 @@ const MineFieldBeginner = () => {
                     mined: false,
                     clicked: false,
                     disabled: false,
+                    checkedForNeighboringMines: false,
                     numberOfNeighboringMines: 0
                 })
                 
@@ -78,6 +80,53 @@ const MineFieldBeginner = () => {
         ))
         setSlotsArray(slotsArrayCopy)
     }
+
+    const revealNeighboringSlots = (x, y) => {
+        let slotsArrayCopy = [...slotsArray]
+        console.log(slotsArrayCopy)
+        if(slotsArrayCopy?.[y]?.[x-1]) {slotsArrayCopy[y][x-1].clicked = true}
+        if(slotsArrayCopy?.[y]?.[x+1]) {slotsArrayCopy[y][x+1].clicked = true}
+        if(slotsArrayCopy?.[y-1]?.[x-1]) {slotsArrayCopy[y-1][x-1].clicked = true}
+        if(slotsArrayCopy?.[y-1]?.[x]) {slotsArrayCopy[y-1][x].clicked = true}
+        if(slotsArrayCopy?.[y-1]?.[x+1]) {slotsArrayCopy[y-1][x+1].clicked = true}
+        if(slotsArrayCopy?.[y+1]?.[x-1]) {slotsArrayCopy[y+1][x-1].clicked = true}
+        if(slotsArrayCopy?.[y+1]?.[x]) {slotsArrayCopy[y+1][x].clicked = true}
+        if(slotsArrayCopy?.[y+1]?.[x+1]) {slotsArrayCopy[y+1][x+1].clicked = true}
+        if(slotsArrayCopy?.[y]?.[x-1]?.numberOfNeighboringMines === 0 && !slotsArrayCopy?.[y]?.[x-1]?.checkedForNeighboringMines) {
+            slotsArrayCopy[y][x-1].checkedForNeighboringMines = true
+            revealNeighboringSlots(x-1, y)
+        }
+        if(slotsArrayCopy?.[y]?.[x+1]?.numberOfNeighboringMines === 0 && !slotsArrayCopy?.[y]?.[x+1]?.checkedForNeighboringMines) {
+            slotsArrayCopy[y][x+1].checkedForNeighboringMines = true
+            revealNeighboringSlots(x+1, y)
+        }
+        if(slotsArrayCopy?.[y-1]?.[x-1]?.numberOfNeighboringMines === 0 && !slotsArrayCopy?.[y-1]?.[x-1]?.checkedForNeighboringMines) {
+            slotsArrayCopy[y-1][x-1].checkedForNeighboringMines = true
+            revealNeighboringSlots(x-1, y-1)
+        }
+        if(slotsArrayCopy?.[y-1]?.[x]?.numberOfNeighboringMines === 0 && !slotsArrayCopy?.[y-1]?.[x]?.checkedForNeighboringMines) {
+            slotsArrayCopy[y-1][x].checkedForNeighboringMines = true
+            revealNeighboringSlots(x, y-1)
+        }
+        if(slotsArrayCopy?.[y-1]?.[x+1]?.numberOfNeighboringMines === 0 && !slotsArrayCopy?.[y-1]?.[x+1]?.checkedForNeighboringMines) {
+            slotsArrayCopy[y-1][x+1].checkedForNeighboringMines = true
+            revealNeighboringSlots(x+1, y-1)
+        }
+        if(slotsArrayCopy?.[y+1]?.[x-1]?.numberOfNeighboringMines === 0 && !slotsArrayCopy?.[y+1]?.[x-1]?.checkedForNeighboringMines) {
+            slotsArrayCopy[y+1][x-1].checkedForNeighboringMines = true
+            revealNeighboringSlots(x-1, y+1)
+        }
+        if(slotsArrayCopy?.[y+1]?.[x]?.numberOfNeighboringMines === 0 && !slotsArrayCopy?.[y+1]?.[x]?.checkedForNeighboringMines) {
+            slotsArrayCopy[y+1][x].checkedForNeighboringMines = true
+            revealNeighboringSlots(x, y+1)
+        }
+        if(slotsArrayCopy?.[y+1]?.[x+1]?.numberOfNeighboringMines === 0 && !slotsArrayCopy?.[y+1]?.[x+1]?.checkedForNeighboringMines) {
+            slotsArrayCopy[y+1][x+1].checkedForNeighboringMines = true
+            revealNeighboringSlots(x+1, y+1)
+        }
+
+        setSlotsArray(slotsArrayCopy)
+    }
     
     const renderMineSlots = () => {
         return slotsArray.map(row => 
@@ -87,7 +136,8 @@ const MineFieldBeginner = () => {
                                         firstSlotClicked={firstSlotClicked}
                                         setFirstSlotClicked={setFirstSlotClicked}
                                         distributeMines={distributeMines}
-                                        revealAllSlots={revealAllSlots}/>))
+                                        revealAllSlots={revealAllSlots}
+                                        revealNeighboringSlots={revealNeighboringSlots}/>))
     }
 
     return(<div className="mine-field-beginner">
