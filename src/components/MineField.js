@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 
 import {Cell} from './'
+import {CellObj} from '../utils'
 
 const MineField = () => {
     const [firstCellClicked, setFirstCellClicked] = useState(false)
@@ -53,15 +54,7 @@ const MineField = () => {
         for(let y = 0; y <gameVariants.beginner.width; y++) {
             let rowArray = []
             for(let x = 0; x < gameVariants.beginner.height; x++){    
-                rowArray.push({
-                    xCoordinate: x,
-                    yCoordinate: y,
-                    mined: false,
-                    clicked: false,
-                    disabled: false,
-                    checkedForNeighboringMines: false,
-                    numberOfNeighboringMines: 0
-                })
+                rowArray.push(new CellObj(x, y))
                 
             }
             mineFieldArray.push(rowArray)

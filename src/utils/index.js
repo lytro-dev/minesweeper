@@ -1,5 +1,5 @@
-import MineSlotObj from "./MineSlotObj"
+import CellObj from "./CellObj"
 
 export {
-    MineSlotObj
+    CellObj
 }
