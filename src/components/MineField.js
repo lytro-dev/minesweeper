@@ -1,25 +1,18 @@
 import React, {useState, useEffect} from 'react'
 
 import {Cell} from './'
-import {CellObj} from '../utils'
+import {CellObj, LevelsEnum} from '../utils'
 
 const MineField = () => {
     const [firstCellClicked, setFirstCellClicked] = useState(false)
     const [mineFieldArray, setMineFieldArray] = useState([])
-    const gameVariants = Object.freeze({
-        beginner: {
-            width: 9,
-            height: 9,
-            numberOfMines: 10
-        }
-    })
     
     useEffect(()=>{
         buildMineFieldArray()
     }, [])
 
     const distributeMines = () => {
-        let numberOfMinesToDistribute = gameVariants.beginner.numberOfMines
+        let numberOfMinesToDistribute = LevelsEnum.beginner.numberOfMines
         const mineFieldArrayCopy = [...mineFieldArray]
         while(numberOfMinesToDistribute>0) {
             let randomRow = mineFieldArrayCopy[Math.floor(Math.random()*mineFieldArrayCopy.length)]
@@ -51,9 +44,9 @@ const MineField = () => {
 
     const buildMineFieldArray = () => {
         const mineFieldArray = []
-        for(let y = 0; y <gameVariants.beginner.width; y++) {
+        for(let y = 0; y <LevelsEnum.beginner.width; y++) {
             let rowArray = []
-            for(let x = 0; x < gameVariants.beginner.height; x++){    
+            for(let x = 0; x < LevelsEnum.beginner.height; x++){    
                 rowArray.push(new CellObj(x, y))
                 
             }

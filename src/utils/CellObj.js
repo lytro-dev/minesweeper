@@ -10,5 +10,4 @@ class CellObj {
     }
 }
 
-
 export default CellObj
