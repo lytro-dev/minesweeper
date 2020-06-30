@@ -7,6 +7,7 @@ const MineField = () => {
     const [firstCellClicked, setFirstCellClicked] = useState(false)
     const [mineFieldArray, setMineFieldArray] = useState([])
     const [gameOver, setGameOver] = useState(false)
+    const [gameWon, setGameWon] = useState(false)
     
     useEffect(()=>{
         buildMineFieldArray()
@@ -112,6 +113,13 @@ const MineField = () => {
 
         setMineFieldArray(mineFieldArrayCopy)
     }
+
+    const checkIfWon = () => {
+        //Check if there are any cells that haven't been clicked and don't contain a mine
+        if (mineFieldArray.filter(row => row.filter(cell => !cell.clicked && !cell.mined).length).length === 0) {
+            setGameWon(true)
+        }
+    }
     
     const renderMineField = () => {
         return mineFieldArray.map(row => 
@@ -124,7 +132,8 @@ const MineField = () => {
                                     revealAllMines={revealAllMines}
                                     revealNeighboringEmptyCells={revealNeighboringEmptyCells}
                                     gameOver={gameOver}
-                                    setGameOver={setGameOver}/>))
+                                    setGameOver={setGameOver}
+                                    checkIfWon={checkIfWon}/>))
     }
 
     return(<div className="mine-field-beginner">

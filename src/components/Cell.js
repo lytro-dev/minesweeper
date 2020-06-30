@@ -8,10 +8,12 @@ const Cell = ({ cellProps,
                 revealAllMines,
                 revealNeighboringEmptyCells,
                 gameOver,
-                setGameOver}) => {
+                setGameOver,
+                checkIfWon}) => {
 
     const [cellDisplay, setCellDisplay] = useState(null)
     const [startLongPress, setStartLongPress] = useState(false)
+    const [steppedOnMine, setSteppedOnMine] = useState(false)
 
     const renderCell = useCallback(() => {
         if(!cellProps.clicked && !cellProps.flagged) {setCellDisplay(null)}
@@ -48,10 +50,12 @@ const Cell = ({ cellProps,
             renderCell()
             if(cellProps.mined) {
                 setGameOver(true)
+                setSteppedOnMine(true)
                 revealAllMines()
             } else if(!cellProps.numberOfNeighboringMines) {
                 revealNeighboringEmptyCells(cellProps.xCoordinate, cellProps.yCoordinate)
-            } 
+            }
+            checkIfWon()
         }   
     }
 
@@ -63,7 +67,8 @@ const Cell = ({ cellProps,
         }    
     }
 
-    return(<div className={`cell ${cellProps.clicked ? '' : 'cell-unclicked'}`}    onClick={handleCellClick}
+    return(<div className={`cell ${cellProps.clicked ? '' : 'cell-unclicked'} ${steppedOnMine ? 'oops-mine' : ''}`}    
+                                    onClick={handleCellClick}
                                     onContextMenu={handleRightClick}
                                     onMouseDown={() => setStartLongPress(true)}
                                     onMouseUp={() => setStartLongPress(false)}
