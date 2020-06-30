@@ -1,12 +1,12 @@
 import React from 'react'
 
 import './App.css'
-import { MineField } from './components'
+import { Game } from './containers'
 
 const App = () => {
   return (
     <div className="App">
-      <MineField />
+      <Game />
     </div>
   );
 }
