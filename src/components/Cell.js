@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
 
+import {Svgs} from '../utils'
+
 const Cell = ({ cellProps, 
                     mineFieldArray,
                     firstCellClicked,
@@ -7,13 +9,13 @@ const Cell = ({ cellProps,
                     revealAllMines,
                     revealNeighboringEmptyCells}) => {
 
-    const [slotDisplay, setSlotDisplay] = useState(null)
+    const [cellDisplay, setCellDisplay] = useState(null)
 
     useEffect(()=> {
         renderCell()
     }, [cellProps.clicked])
 
-    const handleSlotClick = () => {
+    const handleCellClick = () => {
         cellProps.clicked = true;
         if(!firstCellClicked) {
             distributeMines()
@@ -29,14 +31,14 @@ const Cell = ({ cellProps,
     }
 
     const renderCell = () => {
-        if(cellProps.clicked && cellProps.mined) {setSlotDisplay("M")}
-        else if(cellProps.clicked && !cellProps.mined) {setSlotDisplay(cellProps.numberOfNeighboringMines)}
+        if(cellProps.clicked && cellProps.mined) {setCellDisplay(Svgs.mine)}
+        else if(cellProps.clicked && !cellProps.mined) {setCellDisplay(Svgs[cellProps.numberOfNeighboringMines])}
         // {cellProps.disabled && "D"}
         // {cellProps.clicked && !cellProps.mined && renderNumberOfNeighboringMines()}
     }
 
-    return(<div className="mine-slot" onClick={handleSlotClick}>
-        {slotDisplay}
+    return(<div className="cell" onClick={handleCellClick}>
+        {cellDisplay}
     </div>)
 }
 

@@ -35,7 +35,7 @@ body {
   gap: .2rem;
   justify-content: center; }
 
-.mine-slot {
+.cell {
   width: 5rem;
   height: 5rem;
   background-color: white; }
