@@ -63,7 +63,7 @@ const Cell = ({ cellProps,
         }    
     }
 
-    return(<div className="cell"    onClick={handleCellClick}
+    return(<div className={`cell ${cellProps.clicked ? '' : 'cell-unclicked'}`}    onClick={handleCellClick}
                                     onContextMenu={handleRightClick}
                                     onMouseDown={() => setStartLongPress(true)}
                                     onMouseUp={() => setStartLongPress(false)}

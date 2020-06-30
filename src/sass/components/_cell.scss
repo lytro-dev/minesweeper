@@ -1,5 +1,15 @@
 .cell {
     width: 5rem;
     height: 5rem;
-    background-color: white;
+    border-radius: .3rem;
 }
+
+.cell-unclicked {
+    background: linear-gradient(-180deg, $color-secondary 0%, $color-primary 100%);
+    cursor: pointer;
+    box-shadow: 0 1rem 1.25rem 0 gray,
+							0 -0.25rem 1.5rem $color-primary-dark inset,
+							0 0.75rem 0.5rem $color-primary-dark inset,
+							0 0.25rem 0.5rem 0 $color-primary-dark inset;
+}
+
