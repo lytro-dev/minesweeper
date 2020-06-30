@@ -18,7 +18,7 @@ const Cell = ({ cellProps,
     const renderCell = useCallback(() => {
         if(!cellProps.clicked && !cellProps.flagged) {setCellDisplay(null)}
         else if(cellProps.clicked && cellProps.mined) {setCellDisplay(Svgs.mine)}
-        else if(cellProps.flagged) {setCellDisplay(Svgs.flag)}
+        else if(cellProps.flagged) {setCellDisplay(Svgs.crossedFlag)}
         else if(cellProps.clicked && !cellProps.mined) {setCellDisplay(Svgs[cellProps.numberOfNeighboringMines])}
     },[cellProps.clicked, cellProps.mined, cellProps.numberOfNeighboringMines, cellProps.flagged])
 
