@@ -69,7 +69,6 @@ const MineField = () => {
 
     const revealNeighboringEmptyCells = (x, y) => {
         let mineFieldArrayCopy = [...mineFieldArray]
-        console.log(mineFieldArrayCopy)
         if(mineFieldArrayCopy?.[y]?.[x-1]) {mineFieldArrayCopy[y][x-1].clicked = true}
         if(mineFieldArrayCopy?.[y]?.[x+1]) {mineFieldArrayCopy[y][x+1].clicked = true}
         if(mineFieldArrayCopy?.[y-1]?.[x-1]) {mineFieldArrayCopy[y-1][x-1].clicked = true}

@@ -1,9 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 
 import {Svgs} from '../utils'
 
-const Cell = ({ cellProps, 
-                mineFieldArray,
+const Cell = ({ cellProps,
                 firstCellClicked,
                 distributeMines,
                 revealAllMines,
@@ -12,13 +11,36 @@ const Cell = ({ cellProps,
                 setGameOver}) => {
 
     const [cellDisplay, setCellDisplay] = useState(null)
+    const [startLongPress, setStartLongPress] = useState(false)
+
+    const renderCell = useCallback(() => {
+        if(!cellProps.clicked && !cellProps.flagged) {setCellDisplay(null)}
+        else if(cellProps.clicked && cellProps.mined) {setCellDisplay(Svgs.mine)}
+        else if(cellProps.flagged) {setCellDisplay(Svgs.flag)}
+        else if(cellProps.clicked && !cellProps.mined) {setCellDisplay(Svgs[cellProps.numberOfNeighboringMines])}
+    },[cellProps.clicked, cellProps.mined, cellProps.numberOfNeighboringMines, cellProps.flagged])
 
     useEffect(()=> {
         renderCell()
-    }, [cellProps.clicked])
+    }, [cellProps.clicked, renderCell])
+
+    useEffect(() => {
+        let timerId;
+        if (startLongPress) {
+          timerId = setTimeout(()=>{
+              if(!cellProps.clicked) {cellProps.flagged = !cellProps.flagged}
+          }, 1000);
+        } else {
+          clearTimeout(timerId);
+        }
+    
+        return () => {
+          clearTimeout(timerId);
+        };
+      }, [startLongPress, cellProps.clicked, cellProps.flagged]);
 
     const handleCellClick = () => {
-        if(!gameOver) {
+        if(!gameOver && !cellProps.flagged) {
            cellProps.clicked = true;
             if(!firstCellClicked) {
                 distributeMines()
@@ -30,18 +52,24 @@ const Cell = ({ cellProps,
             } else if(!cellProps.numberOfNeighboringMines) {
                 revealNeighboringEmptyCells(cellProps.xCoordinate, cellProps.yCoordinate)
             } 
-        }
-        
+        }   
     }
 
-    const renderCell = () => {
-        if(cellProps.clicked && cellProps.mined) {setCellDisplay(Svgs.mine)}
-        else if(cellProps.clicked && !cellProps.mined) {setCellDisplay(Svgs[cellProps.numberOfNeighboringMines])}
-        // {cellProps.disabled && "D"}
-        // {cellProps.clicked && !cellProps.mined && renderNumberOfNeighboringMines()}
+    const handleRightClick = (e) => {
+        e.preventDefault()
+        if(!cellProps.clicked){
+            cellProps.flagged = !cellProps.flagged
+            renderCell()
+        }    
     }
 
-    return(<div className="cell" onClick={handleCellClick}>
+    return(<div className="cell"    onClick={handleCellClick}
+                                    onContextMenu={handleRightClick}
+                                    onMouseDown={() => setStartLongPress(true)}
+                                    onMouseUp={() => setStartLongPress(false)}
+                                    onMouseLeave={() => setStartLongPress(false)}
+                                    onTouchStart={() => setStartLongPress(true)}
+                                    onTouchEnd={() => setStartLongPress(false)} >
         {cellDisplay}
     </div>)
 }

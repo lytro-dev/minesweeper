@@ -4,7 +4,7 @@ class CellObj {
         this.yCoordinate = yCoordinate
         this.mined = false
         this.clicked = false
-        this.disabled = false
+        this.flagged = false
         this.checkedForNeighboringMines = false
         this.numberOfNeighboringMines = 0   
     }
