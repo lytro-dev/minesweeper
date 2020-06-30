@@ -3,11 +3,13 @@ import React, {useState, useEffect} from 'react'
 import {Svgs} from '../utils'
 
 const Cell = ({ cellProps, 
-                    mineFieldArray,
-                    firstCellClicked,
-                    distributeMines,
-                    revealAllMines,
-                    revealNeighboringEmptyCells}) => {
+                mineFieldArray,
+                firstCellClicked,
+                distributeMines,
+                revealAllMines,
+                revealNeighboringEmptyCells,
+                gameOver,
+                setGameOver}) => {
 
     const [cellDisplay, setCellDisplay] = useState(null)
 
@@ -16,18 +18,20 @@ const Cell = ({ cellProps,
     }, [cellProps.clicked])
 
     const handleCellClick = () => {
-        cellProps.clicked = true;
-        if(!firstCellClicked) {
-            distributeMines()
+        if(!gameOver) {
+           cellProps.clicked = true;
+            if(!firstCellClicked) {
+                distributeMines()
+            }
+            renderCell()
+            if(cellProps.mined) {
+                setGameOver(true)
+                revealAllMines()
+            } else if(!cellProps.numberOfNeighboringMines) {
+                revealNeighboringEmptyCells(cellProps.xCoordinate, cellProps.yCoordinate)
+            } 
         }
-        renderCell()
-        if(cellProps.mined) {
-            revealAllMines()
-        }
-        if(!cellProps.numberOfNeighboringMines) {
-            revealNeighboringEmptyCells(cellProps.xCoordinate, cellProps.yCoordinate)
-        }
-        console.log(mineFieldArray)
+        
     }
 
     const renderCell = () => {

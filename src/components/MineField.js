@@ -6,6 +6,7 @@ import {CellObj, LevelsEnum} from '../utils'
 const MineField = () => {
     const [firstCellClicked, setFirstCellClicked] = useState(false)
     const [mineFieldArray, setMineFieldArray] = useState([])
+    const [gameOver, setGameOver] = useState(false)
     
     useEffect(()=>{
         buildMineFieldArray()
@@ -116,13 +117,15 @@ const MineField = () => {
     const renderMineField = () => {
         return mineFieldArray.map(row => 
             row.map(cell => <Cell   key={`${cell.xCoordinate}${cell.yCoordinate}`} 
-                                        cellProps={cell} 
-                                        mineFieldArray={mineFieldArray}
-                                        firstCellClicked={firstCellClicked}
-                                        setFirstCellClicked={setFirstCellClicked}
-                                        distributeMines={distributeMines}
-                                        revealAllMines={revealAllMines}
-                                        revealNeighboringEmptyCells={revealNeighboringEmptyCells}/>))
+                                    cellProps={cell} 
+                                    mineFieldArray={mineFieldArray}
+                                    firstCellClicked={firstCellClicked}
+                                    setFirstCellClicked={setFirstCellClicked}
+                                    distributeMines={distributeMines}
+                                    revealAllMines={revealAllMines}
+                                    revealNeighboringEmptyCells={revealNeighboringEmptyCells}
+                                    gameOver={gameOver}
+                                    setGameOver={setGameOver}/>))
     }
 
     return(<div className="mine-field-beginner">
