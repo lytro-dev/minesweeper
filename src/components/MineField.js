@@ -62,7 +62,7 @@ const MineField = () => {
         mineFieldArrayCopy.forEach(
             row => row.forEach(
                 cell => {
-                    if (cell.mined) cell.clicked = true
+                    if (cell.mined && !cell.flagged) cell.clicked = true
                 }
         ))
         setMineFieldArray(mineFieldArrayCopy)

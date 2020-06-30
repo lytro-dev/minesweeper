@@ -5,6 +5,7 @@ class CellObj {
         this.mined = false
         this.clicked = false
         this.flagged = false
+        this.missFlagged = false
         this.checkedForNeighboringMines = false
         this.numberOfNeighboringMines = 0   
     }

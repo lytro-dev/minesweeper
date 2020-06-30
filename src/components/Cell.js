@@ -17,21 +17,32 @@ const Cell = ({ cellProps,
 
     const renderCell = useCallback(() => {
         if(!cellProps.clicked && !cellProps.flagged) {setCellDisplay(null)}
-        else if(cellProps.clicked && cellProps.mined) {setCellDisplay(Svgs.mine)}
-        else if(cellProps.flagged) {setCellDisplay(Svgs.crossedFlag)}
+        else if(cellProps.clicked && cellProps.mined && !cellProps.flagged) {setCellDisplay(Svgs.mine)}
+        else if(cellProps.missFlagged && gameOver) {setCellDisplay(Svgs.crossedFlag)}
+        else if(cellProps.flagged) {setCellDisplay(Svgs.flag)}
         else if(cellProps.clicked && !cellProps.mined) {setCellDisplay(Svgs[cellProps.numberOfNeighboringMines])}
-    },[cellProps.clicked, cellProps.mined, cellProps.numberOfNeighboringMines, cellProps.flagged])
+    },[cellProps.clicked, cellProps.mined, cellProps.numberOfNeighboringMines, cellProps.flagged, cellProps.missFlagged, gameOver])
 
     useEffect(()=> {
         renderCell()
     }, [cellProps.clicked, renderCell])
 
+    const toggleFlag = useCallback(() => {
+        if(!cellProps.clicked) {
+            if(!cellProps.flagged) {
+                cellProps.flagged = true
+                cellProps.missFlagged = !cellProps.mined
+            } else {
+                cellProps.flagged = false
+            }
+            renderCell()
+        }
+    }, [cellProps.flagged, cellProps.missFlagged, cellProps.mined, cellProps.clicked, renderCell])
+
     useEffect(() => {
         let timerId;
         if (startLongPress) {
-          timerId = setTimeout(()=>{
-              if(!cellProps.clicked) {cellProps.flagged = !cellProps.flagged}
-          }, 1000);
+          timerId = setTimeout(toggleFlag, 1000);
         } else {
           clearTimeout(timerId);
         }
@@ -39,7 +50,7 @@ const Cell = ({ cellProps,
         return () => {
           clearTimeout(timerId);
         };
-      }, [startLongPress, cellProps.clicked, cellProps.flagged]);
+      }, [startLongPress, cellProps.clicked, cellProps.flagged, toggleFlag]);
 
     const handleCellClick = () => {
         if(!gameOver && !cellProps.flagged) {
@@ -61,10 +72,7 @@ const Cell = ({ cellProps,
 
     const handleRightClick = (e) => {
         e.preventDefault()
-        if(!cellProps.clicked){
-            cellProps.flagged = !cellProps.flagged
-            renderCell()
-        }    
+        toggleFlag() 
     }
 
     return(<div className={`cell ${cellProps.clicked ? '' : 'cell-unclicked'} ${steppedOnMine ? 'oops-mine' : ''}`}    
