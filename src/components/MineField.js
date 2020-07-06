@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 
 import {Cell} from './'
 import {CellObj, LevelsEnum} from '../utils'
+import {GameContext} from '../contexts'
 
 const MineField = () => {
     const [firstCellClicked, setFirstCellClicked] = useState(false)
     const [mineFieldArray, setMineFieldArray] = useState([])
-    const [gameOver, setGameOver] = useState(false)
-    const [gameWon, setGameWon] = useState(false)
+    const {gameOver, setGameOver, gameWon, setGameWon} = useContext(GameContext)
     
     useEffect(()=>{
         buildMineFieldArray()
@@ -118,6 +118,7 @@ const MineField = () => {
         //Check if there are any cells that haven't been clicked and don't contain a mine
         if (mineFieldArray.filter(row => row.filter(cell => !cell.clicked && !cell.mined).length).length === 0) {
             setGameWon(true)
+            console.log('gameWon', gameWon)
         }
     }
     
@@ -138,6 +139,7 @@ const MineField = () => {
 
     return(<div className="mine-field-beginner">
          {renderMineField()}
+         {gameWon && <div>game won</div>}
         </div>)
 }
 
