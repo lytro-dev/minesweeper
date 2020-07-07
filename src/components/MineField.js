@@ -116,6 +116,7 @@ const MineField = () => {
 
     const checkIfWon = () => {
         //Check if there are any cells that haven't been clicked and don't contain a mine
+        console.log(mineFieldArray.filter(row => row.filter(cell => !cell.clicked && !cell.mined).length).length)
         if (mineFieldArray.filter(row => row.filter(cell => !cell.clicked && !cell.mined).length).length === 0) {
             setGameWon(true)
         }

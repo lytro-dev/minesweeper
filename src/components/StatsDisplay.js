@@ -4,8 +4,7 @@ import {GameContext} from '../contexts';
 
 const StatsDisplay = () => {
     const [time, setTime] = useState(0)
-    const {gameWon, gameOver} = useContext(GameContext)
-
+    const {gameWon, gameOver, numberOfRemainingMines} = useContext(GameContext)
     useEffect(()=>{
         let interval
         if(!gameOver || !gameWon) {
@@ -22,6 +21,7 @@ const StatsDisplay = () => {
 
     return(<div className="stats-display">
         <div>{time}</div>
+        <div>{numberOfRemainingMines}</div>
     </div>)
 }
 
