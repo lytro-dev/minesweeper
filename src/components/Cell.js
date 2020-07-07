@@ -1,19 +1,20 @@
-import React, {useState, useEffect, useCallback} from 'react'
+import React, {useState, useEffect, useCallback, useContext} from 'react'
 
 import {Svgs} from '../utils'
+import {GameContext} from '../contexts'
 
 const Cell = ({ cellProps,
                 firstCellClicked,
                 distributeMines,
                 revealAllMines,
                 revealNeighboringEmptyCells,
-                gameOver,
-                setGameOver,
                 checkIfWon}) => {
 
     const [cellDisplay, setCellDisplay] = useState(null)
     const [startLongPress, setStartLongPress] = useState(false)
     const [steppedOnMine, setSteppedOnMine] = useState(false)
+
+    const {gameOver, setGameOver} = useContext(GameContext)
 
     const renderCell = useCallback(() => {
         if(!cellProps.clicked && !cellProps.flagged) {setCellDisplay(null)}
@@ -65,8 +66,8 @@ const Cell = ({ cellProps,
                 revealAllMines()
             } else if(!cellProps.numberOfNeighboringMines) {
                 revealNeighboringEmptyCells(cellProps.xCoordinate, cellProps.yCoordinate)
+                checkIfWon()
             }
-            checkIfWon()
         }   
     }
 
