@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import {GameContext} from '../contexts';
 
@@ -6,23 +6,18 @@ const StatsDisplay = () => {
     const [time, setTime] = useState(0)
     const {gameWon, gameOver} = useContext(GameContext)
 
-    const startTimer = useCallback(() => {
+    useEffect(()=>{
+        let interval
         if(!gameOver || !gameWon) {
-            const interval = setInterval(()=>{
-            setTime(prevState => prevState + 1)
-            console.log('gameOver', gameOver)
+            interval = setInterval(()=>{
             if(gameOver || gameWon) {
-                console.log("inside if block", gameOver)
                 clearInterval(interval)
             }
+            setTime(prevState => prevState + 1)  
         }, 1000)
         }   
+        return () => {if (interval) clearInterval(interval)}
     }, [gameOver, gameWon])
-
-
-    useEffect(()=>{
-        startTimer()
-    }, [startTimer])
 
 
     return(<div className="stats-display">

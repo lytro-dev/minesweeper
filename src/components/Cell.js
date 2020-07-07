@@ -3,7 +3,9 @@ import React, {useState, useEffect, useCallback, useContext} from 'react'
 import {Svgs} from '../utils'
 import {GameContext} from '../contexts'
 
-const Cell = ({ cellProps,
+const Cell = ({ cellProps: {
+                    xCoordinate, yCoordinate, clicked, flagged, mined, missFlagged, numberOfNeighboringMines
+                },
                 firstCellClicked,
                 distributeMines,
                 revealAllMines,
@@ -17,28 +19,28 @@ const Cell = ({ cellProps,
     const {gameOver, setGameOver} = useContext(GameContext)
 
     const renderCell = useCallback(() => {
-        if(!cellProps.clicked && !cellProps.flagged) {setCellDisplay(null)}
-        else if(cellProps.clicked && cellProps.mined && !cellProps.flagged) {setCellDisplay(Svgs.mine)}
-        else if(cellProps.missFlagged && gameOver) {setCellDisplay(Svgs.crossedFlag)}
-        else if(cellProps.flagged) {setCellDisplay(Svgs.flag)}
-        else if(cellProps.clicked && !cellProps.mined) {setCellDisplay(Svgs[cellProps.numberOfNeighboringMines])}
-    },[cellProps.clicked, cellProps.mined, cellProps.numberOfNeighboringMines, cellProps.flagged, cellProps.missFlagged, gameOver])
+        if(!clicked && !flagged) {setCellDisplay(null)}
+        else if(clicked && mined && !flagged) {setCellDisplay(Svgs.mine)}
+        else if(missFlagged && gameOver) {setCellDisplay(Svgs.crossedFlag)}
+        else if(flagged) {setCellDisplay(Svgs.flag)}
+        else if(clicked && !mined) {setCellDisplay(Svgs[numberOfNeighboringMines])}
+    },[clicked, mined, numberOfNeighboringMines, flagged, missFlagged, gameOver])
 
     useEffect(()=> {
         renderCell()
-    }, [cellProps.clicked, renderCell])
+    }, [clicked, renderCell])
 
     const toggleFlag = useCallback(() => {
-        if(!cellProps.clicked) {
-            if(!cellProps.flagged) {
-                cellProps.flagged = true
-                cellProps.missFlagged = !cellProps.mined
+        if(!clicked) {
+            if(!flagged) {
+                flagged = true
+                missFlagged = !mined
             } else {
-                cellProps.flagged = false
+                flagged = false
             }
             renderCell()
         }
-    }, [cellProps.flagged, cellProps.missFlagged, cellProps.mined, cellProps.clicked, renderCell])
+    }, [flagged, missFlagged, mined, clicked, renderCell])
 
     useEffect(() => {
         let timerId;
@@ -51,21 +53,21 @@ const Cell = ({ cellProps,
         return () => {
           clearTimeout(timerId);
         };
-      }, [startLongPress, cellProps.clicked, cellProps.flagged, toggleFlag]);
+      }, [startLongPress, clicked, flagged, toggleFlag]);
 
     const handleCellClick = () => {
-        if(!gameOver && !cellProps.flagged) {
-           cellProps.clicked = true;
+        if(!gameOver && !flagged) {
+           clicked = true;
             if(!firstCellClicked) {
                 distributeMines()
             }
             renderCell()
-            if(cellProps.mined) {
+            if(mined) {
                 setGameOver(true)
                 setSteppedOnMine(true)
                 revealAllMines()
-            } else if(!cellProps.numberOfNeighboringMines) {
-                revealNeighboringEmptyCells(cellProps.xCoordinate, cellProps.yCoordinate)
+            } else if(!numberOfNeighboringMines) {
+                revealNeighboringEmptyCells(xCoordinate, yCoordinate)
                 checkIfWon()
             }
         }   
@@ -76,7 +78,7 @@ const Cell = ({ cellProps,
         toggleFlag() 
     }
 
-    return(<div className={`cell ${cellProps.clicked ? '' : 'cell-unclicked'} ${steppedOnMine ? 'oops-mine' : ''}`}    
+    return(<div className={`cell ${clicked ? '' : 'cell-unclicked'} ${steppedOnMine ? 'oops-mine' : ''}`}    
                                     onClick={handleCellClick}
                                     onContextMenu={handleRightClick}
                                     onMouseDown={() => setStartLongPress(true)}
