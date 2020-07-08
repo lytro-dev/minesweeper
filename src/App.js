@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import './App.css'
 import { Game } from './containers'
@@ -10,6 +10,7 @@ const App = () => {
   const [gameWon, setGameWon] = useState(false)
   const [level, setLevel] = useState('beginner')
   const [numberOfRemainingMines, setNumberOfRemainingMines] = useState(LevelsEnum[level].numberOfMines)
+  const [bestTimes, setBestTimes] = useState({beginner: 999, intermediate: 999, expert: 999})
 
   const value = {
     gameOver,
@@ -19,8 +20,17 @@ const App = () => {
     level,
     setLevel,
     numberOfRemainingMines,
-    setNumberOfRemainingMines
+    setNumberOfRemainingMines,
+    bestTimes,
+    setBestTimes
   }
+
+  useEffect(()=>{
+    const bestTimes = localStorage.getItem('mineSweeperScores')
+    if(bestTimes) {
+      setBestTimes(JSON.parse(bestTimes))
+    }
+  }, [])
 
   return (
     <div className="App">
