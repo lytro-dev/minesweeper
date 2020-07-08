@@ -4,12 +4,13 @@ import {GameContext} from '../contexts';
 
 const StatsDisplay = () => {
     const [time, setTime] = useState(0)
-    const {gameWon, gameOver, numberOfRemainingMines, level, bestTimes, setBestTimes} = useContext(GameContext)
+    const {gameWon, gameOver, numberOfRemainingMines, level, bestTimes, setBestTimes, setGameTime} = useContext(GameContext)
     useEffect(()=>{
         let interval
         if(!gameOver || !gameWon) {
             interval = setInterval(()=>{
             if(gameOver || gameWon) {
+                setGameTime(time)
                 clearInterval(interval)
                 if(gameWon) {
                     if(time < bestTimes[level]) {
@@ -24,7 +25,7 @@ const StatsDisplay = () => {
         }, 1000)
         }   
         return () => {if(interval) clearInterval(interval)}
-    }, [gameOver, gameWon, level, bestTimes, setBestTimes, time])
+    }, [gameOver, gameWon, level, bestTimes, setBestTimes, time, setGameTime])
 
 
     return(<div className="stats-display">
