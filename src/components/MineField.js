@@ -7,7 +7,7 @@ import { GameContext } from '../contexts'
 const MineField = () => {
     const [firstCellClicked, setFirstCellClicked] = useState(false)
     const [mineFieldArray, setMineFieldArray] = useState([])
-    const {gameOver, gameWon, setGameWon} = useContext(GameContext)
+    const {gameOver, setGameOver, gameWon, setGameWon} = useContext(GameContext)
     
     useEffect(()=>{
         buildMineFieldArray()
@@ -116,9 +116,60 @@ const MineField = () => {
 
     const checkIfWon = () => {
         //Check if there are any cells that haven't been clicked and don't contain a mine
-        console.log(mineFieldArray.filter(row => row.filter(cell => !cell.clicked && !cell.mined).length).length)
         if (mineFieldArray.filter(row => row.filter(cell => !cell.clicked && !cell.mined).length).length === 0) {
             setGameWon(true)
+        }
+    }
+
+    const handleNumberClick = (x, y) => {
+        let mineFieldArrayCopy = [...mineFieldArray]
+        //count whether number of neighboring flags is equal to number of neighboring mines
+        let numberOfNeighboringFlags = 0
+        if(mineFieldArrayCopy?.[y]?.[x-1]?.flagged) {numberOfNeighboringFlags++}
+        if(mineFieldArrayCopy?.[y]?.[x+1]?.flagged) {numberOfNeighboringFlags++}
+        if(mineFieldArrayCopy?.[y-1]?.[x-1]?.flagged) {numberOfNeighboringFlags++}
+        if(mineFieldArrayCopy?.[y-1]?.[x]?.flagged) {numberOfNeighboringFlags++}
+        if(mineFieldArrayCopy?.[y-1]?.[x+1]?.flagged) {numberOfNeighboringFlags++}
+        if(mineFieldArrayCopy?.[y+1]?.[x-1]?.flagged) {numberOfNeighboringFlags++}
+        if(mineFieldArrayCopy?.[y+1]?.[x]?.flagged) {numberOfNeighboringFlags++}
+        if(mineFieldArrayCopy?.[y+1]?.[x+1]?.flagged) {numberOfNeighboringFlags++}
+        if(mineFieldArrayCopy[y][x].numberOfNeighboringMines === numberOfNeighboringFlags) {
+            if(mineFieldArrayCopy?.[y]?.[x-1]?.flagged === false) {
+                handleAutoClick(x-1, y, mineFieldArrayCopy)          
+            }
+            if(mineFieldArrayCopy?.[y]?.[x+1]?.flagged === false) {
+                handleAutoClick(x+1, y, mineFieldArrayCopy)
+            }
+            if(mineFieldArrayCopy?.[y-1]?.[x-1]?.flagged === false) {
+                handleAutoClick(x-1, y-1, mineFieldArrayCopy)
+            }
+            if(mineFieldArrayCopy?.[y-1]?.[x]?.flagged === false) {
+                handleAutoClick(x, y-1, mineFieldArrayCopy)
+            }
+            if(mineFieldArrayCopy?.[y-1]?.[x+1]?.flagged === false) {
+                handleAutoClick(x+1, y-1, mineFieldArrayCopy)
+            }
+            if(mineFieldArrayCopy?.[y+1]?.[x-1]?.flagged === false) {
+                handleAutoClick(x-1, y+1, mineFieldArrayCopy)
+            }
+            if(mineFieldArrayCopy?.[y+1]?.[x]?.flagged === false) {
+                handleAutoClick(x, y+1, mineFieldArrayCopy)
+            }
+            if(mineFieldArrayCopy?.[y+1]?.[x+1]?.flagged === false) {
+                handleAutoClick(x+1, y+1, mineFieldArrayCopy)
+            }
+        }
+        setMineFieldArray(mineFieldArrayCopy)
+        checkIfWon()
+    }
+
+    const handleAutoClick = (x, y, mineFieldArrayCopy) => {
+        mineFieldArrayCopy[y][x].clicked = true
+        if(mineFieldArrayCopy[y][x].mined) {
+            setGameOver(true)
+            revealAllMines()
+        } else if(!mineFieldArrayCopy[y][x].numberOfNeighboringMines) {
+            revealNeighboringEmptyCells(x, y)
         }
     }
     
@@ -132,7 +183,8 @@ const MineField = () => {
                                     distributeMines={distributeMines}
                                     revealAllMines={revealAllMines}
                                     revealNeighboringEmptyCells={revealNeighboringEmptyCells}
-                                    checkIfWon={checkIfWon}/>))
+                                    checkIfWon={checkIfWon}
+                                    handleNumberClick={handleNumberClick}/>))
     }
 
     return(<div className="mine-field-beginner">

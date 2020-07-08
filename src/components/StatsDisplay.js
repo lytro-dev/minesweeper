@@ -15,7 +15,7 @@ const StatsDisplay = () => {
             setTime(prevState => prevState + 1)  
         }, 1000)
         }   
-        return () => {if (interval) clearInterval(interval)}
+        return () => {if(interval) clearInterval(interval)}
     }, [gameOver, gameWon])
 
 

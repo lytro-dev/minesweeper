@@ -8,6 +8,7 @@ const Cell = ({ cellProps,
                 distributeMines,
                 revealAllMines,
                 revealNeighboringEmptyCells,
+                handleNumberClick,
                 checkIfWon}) => {
 
     const [cellDisplay, setCellDisplay] = useState(null)
@@ -68,6 +69,8 @@ const Cell = ({ cellProps,
                 revealAllMines()
             } else if(!cellProps.numberOfNeighboringMines) {
                 revealNeighboringEmptyCells(cellProps.xCoordinate, cellProps.yCoordinate)
+            } else {
+                handleNumberClick(cellProps.xCoordinate, cellProps.yCoordinate)
             }
             checkIfWon()
         }   
