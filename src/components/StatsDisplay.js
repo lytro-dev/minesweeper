@@ -28,9 +28,20 @@ const StatsDisplay = () => {
 
 
     return(<div className="stats-display">
-        <div>{time}</div>
-        <div>{numberOfRemainingMines}</div>
-        <div>Best Time: {bestTimes[level]} seconds</div>
+        <div></div>
+        <div>
+            <div>Time</div>
+            <div>{time}</div>
+        </div>
+        <div>
+            <div>Remaining mines</div>
+            <div>{numberOfRemainingMines}</div>
+        </div>
+        <div>
+            <div>Best Time</div>
+            <div>{bestTimes[level]} seconds</div>
+        </div>
+        <div></div>
     </div>)
 }
 

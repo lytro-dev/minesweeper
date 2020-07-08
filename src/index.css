@@ -47,3 +47,7 @@ body {
 
 .oops-mine {
   background-color: #af2d2d; }
+
+.stats-display {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); }
