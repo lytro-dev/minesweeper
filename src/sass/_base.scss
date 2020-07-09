@@ -20,6 +20,42 @@ body {
     grid-template-columns: [full-start] 1fr [content-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [content-end] 1fr [full-end];
 }
 
-.level-text {
+.title-text {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+}
+
+.secondary-title-text {
     font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+.text-main {
+    font-size: 2rem;
+}
+
+.button-main {
+    background-color: $color-primary-dark;
+    color: $overall-background;
+    font-weight: bold;
+    border: none;
+    width: 25rem;
+    border-radius: 6px;
+    font-size: 2rem;
+    text-transform: uppercase;
+    padding: 2rem;
+    cursor: pointer;
+    justify-self: center;
+    transition: all .2s;
+
+    &:hover {
+        transform: translateY(-2px) scale(1.03);
+        filter: brightness(85%);
+        box-shadow: 10px 10px 20px rgba($color: #000000, $alpha: .2);
+    }
+
+    &:active {
+        transform: translateY(-1px) scale(1.01);
+        box-shadow: 5px 5px 10px rgba($color: #000000, $alpha: .2); 
+    }
 }

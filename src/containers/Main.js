@@ -5,11 +5,11 @@ import {GameContext} from '../contexts'
 
 const Main = () => {
 
-    const {gameWon, gameOver} = useContext(GameContext)
+    const {gameWon, gameOver, gameStarted} = useContext(GameContext)
 
     return(<div>
-        <StartView />
-        <Game />
+        {!gameStarted && <StartView />}
+        {gameStarted && (!gameOver && !gameWon) && <Game />}
     </div>)
 }
 

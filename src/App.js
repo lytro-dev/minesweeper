@@ -8,6 +8,7 @@ import {LevelsEnum} from './utils'
 const App = () => {
   const [gameOver, setGameOver] = useState(false)
   const [gameWon, setGameWon] = useState(false)
+  const [gameStarted, setGameStarted] = useState(false)
   const [level, setLevel] = useState('beginner')
   const [numberOfRemainingMines, setNumberOfRemainingMines] = useState(LevelsEnum[level].numberOfMines)
   const [bestTimes, setBestTimes] = useState({beginner: 999, intermediate: 999, expert: 999})
@@ -18,6 +19,8 @@ const App = () => {
     setGameOver,
     gameWon,
     setGameWon,
+    gameStarted,
+    setGameStarted,
     level,
     setLevel,
     numberOfRemainingMines,

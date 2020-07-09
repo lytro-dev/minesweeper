@@ -5,7 +5,7 @@ import { GameContext } from '../contexts'
 const Level = () => {
     const {level} = useContext(GameContext)
 
-    return(<div className="level-text">
+    return(<div className="title-text">
         Level: {level[0].toUpperCase() + level.slice(1)}
     </div>)
 }

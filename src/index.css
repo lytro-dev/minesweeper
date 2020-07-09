@@ -29,8 +29,46 @@ body {
   display: grid;
   grid-template-columns: [full-start] 1fr [content-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [content-end] 1fr [full-end]; }
 
-.level-text {
-  font-size: 3rem; }
+.title-text {
+  font-size: 4rem;
+  margin-bottom: 2rem; }
+
+.secondary-title-text {
+  font-size: 3rem;
+  margin-bottom: 2rem; }
+
+.text-main {
+  font-size: 2rem; }
+
+.button-main {
+  background-color: #989796;
+  color: #151617;
+  font-weight: bold;
+  border: none;
+  width: 25rem;
+  border-radius: 6px;
+  font-size: 2rem;
+  text-transform: uppercase;
+  padding: 2rem;
+  cursor: pointer;
+  justify-self: center;
+  transition: all .2s; }
+  .button-main:hover {
+    transform: translateY(-2px) scale(1.03);
+    filter: brightness(85%);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2); }
+  .button-main:active {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); }
+
+.start-view {
+  display: grid;
+  gap: 3rem; }
+
+.start-view-times {
+  display: grid;
+  gap: 3rem;
+  margin-bottom: 5rem; }
 
 .game {
   display: grid;
