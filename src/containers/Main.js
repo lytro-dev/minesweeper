@@ -8,8 +8,10 @@ const Main = () => {
     const {gameWon, gameOver, gameStarted} = useContext(GameContext)
 
     return(<div>
-        {!gameStarted && <StartView />}
-        {gameStarted && (!gameOver && !gameWon) && <Game />}
+        {!gameStarted && 
+        <StartView />}
+        {gameStarted && (!gameOver && !gameWon) && 
+        <Game />}
     </div>)
 }
 
