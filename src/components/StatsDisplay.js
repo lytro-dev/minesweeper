@@ -39,7 +39,7 @@ const StatsDisplay = () => {
         </div>
         <div>
             <div>Best Time</div>
-            <div>{bestTimes[level]} seconds</div>
+            <div>{bestTimes[level]===999? 'NA': `${bestTimes[level]} seconds`}</div>
         </div>
         <div></div>
     </div>)

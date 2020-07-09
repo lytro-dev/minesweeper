@@ -41,11 +41,13 @@ body {
   font-size: 2rem; }
 
 .button-main {
-  background-color: #989796;
+  background: linear-gradient(-180deg, #e7dfdd 0%, #bdbab9 100%);
+  cursor: pointer;
+  box-shadow: 0 1rem 1.25rem 0 black, 0 -0.25rem 1.5rem #989796 inset, 0 0.75rem 0.5rem #989796 inset, 0 0.25rem 0.5rem 0 #989796 inset;
   color: #151617;
   font-weight: bold;
   border: none;
-  width: 25rem;
+  width: 20rem;
   border-radius: 6px;
   font-size: 2rem;
   text-transform: uppercase;
@@ -78,7 +80,8 @@ body {
   display: grid;
   grid-template-columns: repeat(9, 5rem);
   gap: .2rem;
-  justify-content: center; }
+  justify-content: center;
+  padding-bottom: 2rem; }
 
 .cell {
   width: 5rem;
@@ -88,7 +91,7 @@ body {
 .cell-unclicked {
   background: linear-gradient(-180deg, #e7dfdd 0%, #bdbab9 100%);
   cursor: pointer;
-  box-shadow: 0 1rem 1.25rem 0 gray, 0 -0.25rem 1.5rem #989796 inset, 0 0.75rem 0.5rem #989796 inset, 0 0.25rem 0.5rem 0 #989796 inset; }
+  box-shadow: 0 1rem 1.25rem 0 black, 0 -0.25rem 1.5rem #989796 inset, 0 0.75rem 0.5rem #989796 inset, 0 0.25rem 0.5rem 0 #989796 inset; }
 
 .oops-mine {
   background-color: #af2d2d; }

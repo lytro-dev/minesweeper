@@ -7,7 +7,7 @@ import { GameContext } from '../contexts'
 const MineField = () => {
     const [firstCellClicked, setFirstCellClicked] = useState(false)
     const [mineFieldArray, setMineFieldArray] = useState([])
-    const {gameOver, setGameOver, gameWon, setGameWon} = useContext(GameContext)
+    const {setGameOver, setGameWon} = useContext(GameContext)
     
     useEffect(()=>{
         buildMineFieldArray()
@@ -189,8 +189,6 @@ const MineField = () => {
 
     return(<div className="mine-field-beginner">
          {renderMineField()}
-         {gameWon && <div>game won</div>}
-         {gameOver && <div>game over</div>}
         </div>)
 }
 

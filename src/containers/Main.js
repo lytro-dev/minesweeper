@@ -1,17 +1,20 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 
-import {Game, StartView} from './'
-import {GameContext} from '../contexts'
+import { Game, StartView, EndView } from './'
+import { GameContext } from '../contexts'
 
 const Main = () => {
 
-    const {gameWon, gameOver, gameStarted} = useContext(GameContext)
+    const { gameStarted } = useContext(GameContext)
 
     return(<div>
         {!gameStarted && 
         <StartView />}
-        {gameStarted && (!gameOver && !gameWon) && 
-        <Game />}
+        {gameStarted && 
+        <>
+            <Game />
+            <EndView />
+        </>}
     </div>)
 }
 

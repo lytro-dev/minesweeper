@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 
 import { GameContext } from '../contexts'
 
@@ -9,7 +9,7 @@ const StartView = () => {
         <div className="title-text">Minesweeper game</div>
         <div className="secondary-title-text">Top times</div>
         <div className="text-main start-view-times">
-            <div>{`Beginner: ${bestTimes.beginner} seconds`}</div>
+            <div>{`Beginner: ${bestTimes.beginner === 999 ? "(Haven't cracked that one yet)" : `${bestTimes.beginner} seconds`}`}</div>
             <div>{`Intermediate: ${bestTimes.intermediate === 999 ? "(Haven't cracked that one yet)" : `${bestTimes.intermediate} seconds`}`}</div>
             <div>{`Expert: ${bestTimes.expert === 999 ? "(Haven't cracked that one yet)" : `${bestTimes.expert} seconds`}`}</div>
         </div>
