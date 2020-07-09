@@ -13,6 +13,7 @@ const App = () => {
   const [numberOfRemainingMines, setNumberOfRemainingMines] = useState(LevelsEnum[level].numberOfMines)
   const [bestTimes, setBestTimes] = useState({beginner: 999, intermediate: 999, expert: 999})
   const [gameTime, setGameTime] = useState(0)
+  const [resetGame, setResetGame] = useState(false)
 
   const value = {
     gameOver,
@@ -28,7 +29,9 @@ const App = () => {
     bestTimes,
     setBestTimes,
     gameTime,
-    setGameTime
+    setGameTime,
+    resetGame,
+    setResetGame
   }
 
   useEffect(()=>{

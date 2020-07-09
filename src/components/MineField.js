@@ -7,11 +7,12 @@ import { GameContext } from '../contexts'
 const MineField = () => {
     const [firstCellClicked, setFirstCellClicked] = useState(false)
     const [mineFieldArray, setMineFieldArray] = useState([])
-    const {setGameOver, setGameWon} = useContext(GameContext)
+    const {setGameOver, setGameWon, resetGame} = useContext(GameContext)
     
     useEffect(()=>{
         buildMineFieldArray()
-    }, [])
+        setFirstCellClicked(false)
+    }, [resetGame])
 
     const distributeMines = () => {
         let numberOfMinesToDistribute = LevelsEnum.beginner.numberOfMines

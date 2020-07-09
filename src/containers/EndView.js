@@ -13,13 +13,10 @@ const EndView = () => {
         if(gameWon) 
             return <>
                 <div className="title-text">{successMessages[Math.floor(Math.random()*successMessages.length)]}</div>
-                <div className="text-main">It took you {gameTime} seconds to solve it</div>
-                <div className="text-main">Your fastest time for this level is: {bestTimes[level]} seconds</div>
             </>
         if(gameOver) 
         return <>
             <div className="title-text">{failMessages[Math.floor(Math.random()*failMessages.length)]}</div>
-            {bestTimes[level] === 999 ? null : <div className="text-main">Your highest score for this level is: {bestTimes[level]}</div>}
         </> 
     }, [gameWon, gameOver])
 

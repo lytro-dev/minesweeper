@@ -15,7 +15,7 @@ const Cell = ({ cellProps,
     const [startLongPress, setStartLongPress] = useState(false)
     const [steppedOnMine, setSteppedOnMine] = useState(false)
 
-    const {gameOver, setGameOver, setNumberOfRemainingMines} = useContext(GameContext)
+    const {gameOver, setGameOver, setNumberOfRemainingMines, resetGame} = useContext(GameContext)
 
     const renderCell = useCallback(() => {
         if(!cellProps.clicked && !cellProps.flagged) {setCellDisplay(null)}
@@ -24,6 +24,10 @@ const Cell = ({ cellProps,
         else if(cellProps.flagged) {setCellDisplay(Svgs.flag)}
         else if(cellProps.clicked && !cellProps.mined) {setCellDisplay(Svgs[cellProps.numberOfNeighboringMines])}
     },[cellProps.clicked, cellProps.mined, cellProps.numberOfNeighboringMines, cellProps.flagged, cellProps.missFlagged, gameOver])
+
+    useEffect(()=>{
+        setSteppedOnMine(false)
+    }, [resetGame])
 
     useEffect(()=> {
         renderCell()
