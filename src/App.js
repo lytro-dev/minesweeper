@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 
 import './App.css'
-import { Game } from './containers'
+import {Main} from './containers'
 import {GameContext} from './contexts'
 import {LevelsEnum} from './utils'
 
@@ -38,7 +38,7 @@ const App = () => {
   return (
     <div className="App">
       <GameContext.Provider value={value}>
-        <Game />
+        <Main />
       </GameContext.Provider>     
     </div>
   );

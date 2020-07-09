@@ -10,22 +10,21 @@ const StatsDisplay = () => {
         if(!gameOver || !gameWon) {
             interval = setInterval(()=>{
             if(gameOver || gameWon) {
-                setGameTime(time)
                 clearInterval(interval)
+                setGameTime(time)
                 if(gameWon) {
                     if(time < bestTimes[level]) {
                         const updatedBestTimes = {...bestTimes, [level]: time}
                         setBestTimes(updatedBestTimes)
                         localStorage.setItem('mineSweeperScores', JSON.stringify(updatedBestTimes))
-                    }
-                    
+                    }  
                 }
             }
             setTime(prevState => prevState + 1)  
         }, 1000)
         }   
         return () => {if(interval) clearInterval(interval)}
-    }, [gameOver, gameWon, level, bestTimes, setBestTimes, time, setGameTime])
+    }, [gameOver, gameWon])
 
 
     return(<div className="stats-display">

@@ -1,5 +1,9 @@
+import Main from './Main'
 import Game from './Game'
+import StartView from './StartView'
 
 export {
-    Game
+    Main,
+    Game,
+    StartView
 }
