@@ -5,30 +5,20 @@ import { LevelsEnum } from '../utils'
 
 const LevelButtons = () => {
 
-    const {setLevel, setResetGame, setNumberOfRemainingMines} = useContext(GameContext)
+    const {setLevel, setResetGame, setGameOver, setGameWon, setNumberOfRemainingMines} = useContext(GameContext)
 
-    const handleBeginnerClick = () => {
-        setLevel('beginner')
+    const handleLevelClick = (level) => {
+        setLevel(level)
+        setNumberOfRemainingMines(LevelsEnum[level].numberOfMines)
         setResetGame(true)
-        setNumberOfRemainingMines(LevelsEnum.beginner.numberOfMines)
-    }
-
-    const handleIntermediateClick = () => {
-        setLevel('intermediate')
-        setResetGame(true)
-        setNumberOfRemainingMines(LevelsEnum.intermediate.numberOfMines)
-    }
-
-    const handleExpertClick = () => {
-        setLevel('expert')
-        setResetGame(true)
-        setNumberOfRemainingMines(LevelsEnum.expert.numberOfMines)
+        setGameOver(false)
+        setGameWon(false)
     }
 
     return(<div className="level-buttons">
-        <button className="button-main" onClick={handleBeginnerClick}>Beginner</button>
-        <button className="button-main" onClick={handleIntermediateClick}>Intermediate</button>
-        <button className="button-main" onClick={handleExpertClick}>Expert</button>
+        <button className="button-main" onClick={() => handleLevelClick('beginner')}>Beginner</button>
+        <button className="button-main" onClick={() => handleLevelClick('intermediate')}>Intermediate</button>
+        <button className="button-main" onClick={() => handleLevelClick('expert')}>Expert</button>
     </div>)
 }
 

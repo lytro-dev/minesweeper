@@ -79,20 +79,23 @@ body {
 .mine-field-beginner {
   display: grid;
   grid-template-columns: repeat(9, 5rem);
+  grid-template-rows: repeat(9, 5rem);
   gap: .2rem;
   justify-content: center;
   padding-bottom: 2rem; }
 
 .mine-field-intermediate {
   display: grid;
-  grid-template-columns: repeat(13, 5rem);
+  grid-template-columns: repeat(13, 4.5rem);
+  grid-template-rows: repeat(16, 4.5rem);
   gap: .2rem;
   justify-content: center;
   padding-bottom: 2rem; }
 
 .mine-field-expert {
   display: grid;
-  grid-template-columns: repeat(16, 5rem);
+  grid-template-columns: repeat(16, 4rem);
+  grid-template-rows: repeat(30, 4rem);
   gap: .2rem;
   justify-content: center;
   padding-bottom: 2rem; }
@@ -104,8 +107,7 @@ body {
   gap: 5rem; }
 
 .cell {
-  width: 5rem;
-  height: 5rem;
+  width: 100%;
   border-radius: .3rem; }
 
 .cell-unclicked {

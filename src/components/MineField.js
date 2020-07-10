@@ -47,9 +47,9 @@ const MineField = () => {
 
     const buildMineFieldArray = () => {
         const mineFieldArray = []
-        for(let y = 0; y <LevelsEnum[level].width; y++) {
+        for(let y = 0; y <LevelsEnum[level].height; y++) {
             let rowArray = []
-            for(let x = 0; x < LevelsEnum[level].height; x++){    
+            for(let x = 0; x < LevelsEnum[level].width; x++){    
                 rowArray.push(new CellObj(x, y))
                 
             }
