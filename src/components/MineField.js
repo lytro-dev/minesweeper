@@ -7,7 +7,7 @@ import { GameContext } from '../contexts'
 const MineField = () => {
     const [firstCellClicked, setFirstCellClicked] = useState(false)
     const [mineFieldArray, setMineFieldArray] = useState([])
-    const {setGameOver, setGameWon, resetGame} = useContext(GameContext)
+    const {setGameOver, setGameWon, resetGame, level} = useContext(GameContext)
     
     useEffect(()=>{
         buildMineFieldArray()
@@ -15,7 +15,7 @@ const MineField = () => {
     }, [resetGame])
 
     const distributeMines = () => {
-        let numberOfMinesToDistribute = LevelsEnum.beginner.numberOfMines
+        let numberOfMinesToDistribute = LevelsEnum[level].numberOfMines
         const mineFieldArrayCopy = [...mineFieldArray]
         while(numberOfMinesToDistribute>0) {
             let randomRow = mineFieldArrayCopy[Math.floor(Math.random()*mineFieldArrayCopy.length)]
@@ -47,9 +47,9 @@ const MineField = () => {
 
     const buildMineFieldArray = () => {
         const mineFieldArray = []
-        for(let y = 0; y <LevelsEnum.beginner.width; y++) {
+        for(let y = 0; y <LevelsEnum[level].width; y++) {
             let rowArray = []
-            for(let x = 0; x < LevelsEnum.beginner.height; x++){    
+            for(let x = 0; x < LevelsEnum[level].height; x++){    
                 rowArray.push(new CellObj(x, y))
                 
             }
@@ -188,7 +188,17 @@ const MineField = () => {
                                     handleNumberClick={handleNumberClick}/>))
     }
 
-    return(<div className="mine-field-beginner">
+    const renderClassName = () => {
+        if(level === 'beginner') {
+            return "mine-field-beginner"
+        } else if(level === 'intermediate') {
+            return "mine-field-intermediate"
+        } else if(level === 'expert') {
+            return "mine-field-expert"
+        }
+    }
+
+    return(<div className={renderClassName()}>
          {renderMineField()}
         </div>)
 }

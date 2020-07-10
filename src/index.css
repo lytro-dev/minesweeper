@@ -83,6 +83,20 @@ body {
   justify-content: center;
   padding-bottom: 2rem; }
 
+.mine-field-intermediate {
+  display: grid;
+  grid-template-columns: repeat(13, 5rem);
+  gap: .2rem;
+  justify-content: center;
+  padding-bottom: 2rem; }
+
+.mine-field-expert {
+  display: grid;
+  grid-template-columns: repeat(16, 5rem);
+  gap: .2rem;
+  justify-content: center;
+  padding-bottom: 2rem; }
+
 .level-buttons {
   margin: 0rem 5rem;
   display: grid;
