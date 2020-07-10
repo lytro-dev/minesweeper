@@ -3,7 +3,7 @@ import React, { useContext, useMemo } from 'react'
 import { GameContext } from '../contexts'
 
 const EndView = () => {
-    const {gameWon, gameOver, level, bestTimes, gameTime} = useContext(GameContext)
+    const { gameWon, gameOver } = useContext(GameContext)
 
     const successMessages = ["Well done!", "Awesome job!", "You killed it!", "Nice Work!", "Sweet! Good job..", "Great work!"]
     const failMessages = ["Oops! Next time..", "Auch!!", "Good run. Better luck next time :)", "Ah well.. Good effort though"]
