@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { MineField, StatsDisplay, Level } from '../components'
+import { MineField, StatsDisplay, Level, LevelButtons } from '../components'
 
 import { GameContext } from '../contexts'
 
@@ -19,6 +19,7 @@ const Game = () => {
         <button className="button-main" onClick={handleReplayClick}>Replay</button>
         <StatsDisplay />
         <MineField />
+        <LevelButtons />
     </div>)
 }
 
