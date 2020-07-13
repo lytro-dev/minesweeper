@@ -45,7 +45,7 @@ const StatsDisplay = () => {
             <div>{numberOfRemainingMines}</div>
         </div>
         <div>
-            <div>Best Time</div>
+            <div>Your Best Time</div>
             <div>{bestTimes[level]===999? 'NA': `${bestTimes[level]} seconds`}</div>
         </div>
         <div></div>

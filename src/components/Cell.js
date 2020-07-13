@@ -56,9 +56,9 @@ const Cell = ({ cellProps,
         }
     
         return () => {
-          clearTimeout(timerId);
+          if(timerId) clearTimeout(timerId);
         };
-      }, [startLongPress, cellProps.clicked, cellProps.flagged, toggleFlag]);
+      }, [startLongPress]);
 
     const handleCellClick = () => {
         if(!gameOver && !cellProps.flagged) {
@@ -92,7 +92,8 @@ const Cell = ({ cellProps,
                                     onMouseUp={() => setStartLongPress(false)}
                                     onMouseLeave={() => setStartLongPress(false)}
                                     onTouchStart={() => setStartLongPress(true)}
-                                    onTouchEnd={() => setStartLongPress(false)} >
+                                    onTouchEnd={() => setStartLongPress(false)} 
+                                    >
         {cellDisplay}
     </div>)
 }

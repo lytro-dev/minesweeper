@@ -3,15 +3,17 @@ import React, { useContext } from 'react'
 import { MineField, StatsDisplay, Level, LevelButtons } from '../components'
 
 import { GameContext } from '../contexts'
+import { LevelsEnum } from '../utils'
 
 const Game = () => {
 
-    const { setGameOver, setGameWon, setResetGame } = useContext(GameContext)
+    const { setGameOver, setGameWon, setResetGame, setNumberOfRemainingMines, level } = useContext(GameContext)
 
     const handleReplayClick = () => {
         setResetGame(true)
         setGameOver(false)
         setGameWon(false)
+        setNumberOfRemainingMines(LevelsEnum[level].numberOfMines)
     }
 
     return(<div className="game">
