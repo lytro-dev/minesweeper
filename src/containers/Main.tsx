@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { Game, StartView, EndView } from './'
+import { Game, StartView, EndView } from '.'
 import { GameContext } from '../contexts'
 
 const Main = () => {
