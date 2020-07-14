@@ -189,11 +189,11 @@ const MineField = () => {
     }
 
     const renderClassName = () => {
-        if(level === 'beginner') {
+        if(level === 'BEGINNER') {
             return "mine-field-beginner"
-        } else if(level === 'intermediate') {
+        } else if(level === 'INTERMEDIATE') {
             return "mine-field-intermediate"
-        } else if(level === 'expert') {
+        } else if(level === 'EXPERT') {
             return "mine-field-expert"
         }
     }

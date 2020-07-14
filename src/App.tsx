@@ -5,13 +5,13 @@ import {Main} from './containers'
 import {GameContext} from './contexts'
 import {LevelsEnum} from './utils'
 
-const App = () => {
+const App: React.FC = () => {
   const [gameOver, setGameOver] = useState(false)
   const [gameWon, setGameWon] = useState(false)
   const [gameStarted, setGameStarted] = useState(false)
-  const [level, setLevel] = useState('beginner')
+  const [level, setLevel] = useState('BEGINNER')
   const [numberOfRemainingMines, setNumberOfRemainingMines] = useState(LevelsEnum[level].numberOfMines)
-  const [bestTimes, setBestTimes] = useState({beginner: 999, intermediate: 999, expert: 999})
+  const [bestTimes, setBestTimes] = useState({BEGINNER: 999, INTERMEDIATE: 999, EXPERT: 999})
   const [gameTime, setGameTime] = useState(0)
   const [resetGame, setResetGame] = useState(false)
 

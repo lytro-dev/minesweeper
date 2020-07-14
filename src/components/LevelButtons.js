@@ -16,9 +16,9 @@ const LevelButtons = () => {
     }
 
     return(<div className="level-buttons">
-        <button className="button-main" onClick={() => handleLevelClick('beginner')}>Beginner</button>
-        <button className="button-main" onClick={() => handleLevelClick('intermediate')}>Intermediate</button>
-        <button className="button-main" onClick={() => handleLevelClick('expert')}>Expert</button>
+        <button className="button-main" onClick={() => handleLevelClick('BEGINNER')}>Beginner</button>
+        <button className="button-main" onClick={() => handleLevelClick('INTERMEDIATE')}>Intermediate</button>
+        <button className="button-main" onClick={() => handleLevelClick('EXPERT')}>Expert</button>
     </div>)
 }
 
