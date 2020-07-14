@@ -5,11 +5,11 @@ import { MineField, StatsDisplay, Level, LevelButtons } from '../components'
 import { GameContext } from '../contexts'
 import { LevelsEnum } from '../utils'
 
-const Game = () => {
+const Game: React.FC = () => {
 
     const { setGameOver, setGameWon, setResetGame, setNumberOfRemainingMines, level } = useContext(GameContext)
 
-    const handleReplayClick = () => {
+    const handleReplayClick = (): void => {
         setResetGame(true)
         setGameOver(false)
         setGameWon(false)

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 
 import { GameContext } from '../contexts'
-import { LevelNames } from '../utils'
 
 const StartView: React.FC = () => {
     const { bestTimes, setGameStarted } = useContext(GameContext)
