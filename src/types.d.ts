@@ -4,6 +4,8 @@ type BestTimes = {
     EXPERT: number
 }
 
+type Level = 'BEGINNER' | 'INTERMEDIATE' | 'EXPERT'
+
 type Context = {
     gameOver: boolean,
     setGameOver: (value: boolean) => void,
@@ -11,8 +13,8 @@ type Context = {
     setGameWon: (value: boolean) => void,
     gameStarted: boolean,
     setGameStarted: (value: boolean) => void,
-    level: LevelNames,
-    setLevel: (value: LevelNames) => void,
+    level: Level,
+    setLevel: (value: Level) => void,
     numberOfRemainingMines: number,
     setNumberOfRemainingMines: (value: number) => void,
     bestTimes: BestTimes,

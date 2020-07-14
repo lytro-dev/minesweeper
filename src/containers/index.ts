@@ -1,4 +1,4 @@
-import Main from './Main.tsx'
+import Main from './Main'
 import Game from './Game'
 import StartView from './StartView'
 import EndView from './EndView'

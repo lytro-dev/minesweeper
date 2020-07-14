@@ -2,7 +2,7 @@ import React, { useContext, useMemo } from 'react'
 
 import { GameContext } from '../contexts'
 
-const EndView = () => {
+const EndView: React.FC = () => {
     const { gameWon, gameOver } = useContext(GameContext)
 
     const successMessages = ["Well done!", "Awesome job!", "You killed it!", "Nice Work!", "Sweet! Good job..", "Great work!"]
