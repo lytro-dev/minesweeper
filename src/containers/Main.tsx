@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import { Game, StartView, EndView } from '.'
 import { GameContext } from '../contexts'
 
-const Main = () => {
+const Main: React.FC = () => {
 
     const { gameStarted } = useContext(GameContext)
 
