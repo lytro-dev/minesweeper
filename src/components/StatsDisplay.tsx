@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import {GameContext} from '../contexts';
 
-const StatsDisplay = () => {
+const StatsDisplay: React.FC = () => {
     const [time, setTime] = useState(0)
     const {gameWon, gameOver, numberOfRemainingMines, level, bestTimes, setBestTimes, setGameTime, resetGame, setResetGame} = useContext(GameContext)
     
@@ -13,7 +13,7 @@ const StatsDisplay = () => {
     }, [resetGame])
 
     useEffect(()=>{
-        let interval
+        let interval: NodeJS.Timer
         if(!gameOver || !gameWon) {
             interval = setInterval(()=>{
             if(gameOver || gameWon) {

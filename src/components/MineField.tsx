@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 
 import { Cell } from './'
-import { CellObj, LevelsEnum } from '../utils'
+import { CellObj, LevelsEnum, LevelNames } from '../utils'
 import { GameContext } from '../contexts'
 
-const MineField = () => {
+const MineField: React.FC = () => {
     const [firstCellClicked, setFirstCellClicked] = useState(false)
-    const [mineFieldArray, setMineFieldArray] = useState([])
+    const [mineFieldArray, setMineFieldArray] = useState<Cell[][]>([])
     const {setGameOver, setGameWon, resetGame, level} = useContext(GameContext)
     
     useEffect(()=>{
@@ -14,8 +14,8 @@ const MineField = () => {
         setFirstCellClicked(false)
     }, [resetGame])
 
-    const distributeMines = () => {
-        let numberOfMinesToDistribute = LevelsEnum[level].numberOfMines
+    const distributeMines = (): void => {
+        let numberOfMinesToDistribute: number = LevelsEnum[level].numberOfMines
         const mineFieldArrayCopy = [...mineFieldArray]
         while(numberOfMinesToDistribute>0) {
             let randomRow = mineFieldArrayCopy[Math.floor(Math.random()*mineFieldArrayCopy.length)]
@@ -45,10 +45,10 @@ const MineField = () => {
         setFirstCellClicked(true)
     }
 
-    const buildMineFieldArray = () => {
-        const mineFieldArray = []
+    const buildMineFieldArray = (): void => {
+        const mineFieldArray: Cell[][] = []
         for(let y = 0; y <LevelsEnum[level].height; y++) {
-            let rowArray = []
+            let rowArray: Cell[] = []
             for(let x = 0; x < LevelsEnum[level].width; x++){    
                 rowArray.push(new CellObj(x, y))
                 
@@ -58,7 +58,7 @@ const MineField = () => {
         setMineFieldArray(mineFieldArray)
     }
 
-    const revealAllMines = () => {
+    const revealAllMines = (): void => {
         const mineFieldArrayCopy = [...mineFieldArray]
         mineFieldArrayCopy.forEach(
             row => row.forEach(
@@ -69,7 +69,7 @@ const MineField = () => {
         setMineFieldArray(mineFieldArrayCopy)
     }
 
-    const revealNeighboringEmptyCells = (x, y) => {
+    const revealNeighboringEmptyCells = (x: number, y: number): void => {
         let mineFieldArrayCopy = [...mineFieldArray]
         if(mineFieldArrayCopy?.[y]?.[x-1]) {mineFieldArrayCopy[y][x-1].clicked = true}
         if(mineFieldArrayCopy?.[y]?.[x+1]) {mineFieldArrayCopy[y][x+1].clicked = true}
@@ -122,7 +122,7 @@ const MineField = () => {
         }
     }
 
-    const handleNumberClick = (x, y) => {
+    const handleNumberClick = (x: number, y: number): void => {
         let mineFieldArrayCopy = [...mineFieldArray]
         //count whether number of neighboring flags is equal to number of neighboring mines
         let numberOfNeighboringFlags = 0
@@ -164,7 +164,7 @@ const MineField = () => {
         checkIfWon()
     }
 
-    const handleAutoClick = (x, y, mineFieldArrayCopy) => {
+    const handleAutoClick = (x: number, y: number, mineFieldArrayCopy: Cell[][]): void => {
         mineFieldArrayCopy[y][x].clicked = true
         if(mineFieldArrayCopy[y][x].mined) {
             setGameOver(true)
@@ -178,9 +178,7 @@ const MineField = () => {
         return mineFieldArray.map(row => 
             row.map(cell => <Cell   key={`${cell.xCoordinate}${cell.yCoordinate}`} 
                                     cellProps={cell} 
-                                    mineFieldArray={mineFieldArray}
                                     firstCellClicked={firstCellClicked}
-                                    setFirstCellClicked={setFirstCellClicked}
                                     distributeMines={distributeMines}
                                     revealAllMines={revealAllMines}
                                     revealNeighboringEmptyCells={revealNeighboringEmptyCells}
@@ -189,12 +187,14 @@ const MineField = () => {
     }
 
     const renderClassName = () => {
-        if(level === 'BEGINNER') {
+        if(level === LevelNames.BEGINNER) {
             return "mine-field-beginner"
-        } else if(level === 'INTERMEDIATE') {
+        } else if(level === LevelNames.INTERMEDIATE) {
             return "mine-field-intermediate"
-        } else if(level === 'EXPERT') {
+        } else if(level === LevelNames.EXPERT) {
             return "mine-field-expert"
+        } else {
+            return ""
         }
     }
 

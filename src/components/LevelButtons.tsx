@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
 
 import { GameContext } from '../contexts'
-import { LevelsEnum } from '../utils'
+import { LevelsEnum, LevelNames } from '../utils'
 
 const LevelButtons = () => {
 
     const {setLevel, setResetGame, setGameOver, setGameWon, setNumberOfRemainingMines} = useContext(GameContext)
 
-    const handleLevelClick = (level) => {
+    const handleLevelClick = (level: Level): void => {
         setLevel(level)
         setNumberOfRemainingMines(LevelsEnum[level].numberOfMines)
         setResetGame(true)
@@ -16,9 +16,9 @@ const LevelButtons = () => {
     }
 
     return(<div className="level-buttons">
-        <button className="button-main" onClick={() => handleLevelClick('BEGINNER')}>Beginner</button>
-        <button className="button-main" onClick={() => handleLevelClick('INTERMEDIATE')}>Intermediate</button>
-        <button className="button-main" onClick={() => handleLevelClick('EXPERT')}>Expert</button>
+        <button className="button-main" onClick={() => handleLevelClick(LevelNames.BEGINNER)}>Beginner</button>
+        <button className="button-main" onClick={() => handleLevelClick(LevelNames.INTERMEDIATE)}>Intermediate</button>
+        <button className="button-main" onClick={() => handleLevelClick(LevelNames.EXPERT)}>Expert</button>
     </div>)
 }
 

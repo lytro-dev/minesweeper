@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 
 import { GameContext } from '../contexts'
 
-const Level = () => {
+const Level: React.FC = () => {
     const {level} = useContext(GameContext)
 
     return(<div className="title-text">

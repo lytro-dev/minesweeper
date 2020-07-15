@@ -24,3 +24,14 @@ type Context = {
     resetGame: boolean,
     setResetGame: (value: boolean) => void
   }
+
+  type Cell = {
+      xCoordinate: number,
+      yCoordinate: number,
+      mined: boolean,
+      clicked: boolean,
+      flagged: boolean,
+      missFlagged: boolean,
+      checkedForNeighboringMines: boolean,
+      numberOfNeighboringMines: number
+  }

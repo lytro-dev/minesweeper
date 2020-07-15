@@ -3,15 +3,25 @@ import React, {useState, useEffect, useCallback, useContext} from 'react'
 import {Svgs} from '../utils'
 import {GameContext} from '../contexts'
 
-const Cell = ({ cellProps,
-                firstCellClicked,
-                distributeMines,
-                revealAllMines,
-                revealNeighboringEmptyCells,
-                handleNumberClick,
-                checkIfWon}) => {
+type Props = {
+    cellProps: Cell,
+    firstCellClicked: boolean,
+    distributeMines: () => void,
+    revealAllMines: () => void,
+    revealNeighboringEmptyCells: (x: number, y: number) => void,
+    checkIfWon: () => void,
+    handleNumberClick: (x: number, y: number) => void
+}
 
-    const [cellDisplay, setCellDisplay] = useState(null)
+const Cell: React.FC<Props> = ({   cellProps,
+                                    firstCellClicked,
+                                    distributeMines,
+                                    revealAllMines,
+                                    revealNeighboringEmptyCells,
+                                    handleNumberClick,
+                                    checkIfWon}) => {
+
+    const [cellDisplay, setCellDisplay] = useState<null | JSX.Element>(null)
     const [startLongPress, setStartLongPress] = useState(false)
     const [steppedOnMine, setSteppedOnMine] = useState(false)
 
@@ -48,7 +58,7 @@ const Cell = ({ cellProps,
     }, [cellProps.flagged, cellProps.missFlagged, cellProps.mined, cellProps.clicked, renderCell, setNumberOfRemainingMines])
 
     useEffect(() => {
-        let timerId;
+        let timerId: NodeJS.Timer;
         if (startLongPress) {
           timerId = setTimeout(toggleFlag, 1000);
         } else {
