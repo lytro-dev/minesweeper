@@ -1,5 +1,13 @@
 class CellObj {
-    constructor(xCoordinate, yCoordinate) {
+    xCoordinate: number
+    yCoordinate: number
+    mined: boolean
+    clicked: boolean
+    flagged: boolean
+    missFlagged: boolean
+    checkedForNeighboringMines: boolean
+    numberOfNeighboringMines: number
+    constructor(xCoordinate: number, yCoordinate: number) {
         this.xCoordinate = xCoordinate
         this.yCoordinate = yCoordinate
         this.mined = false

@@ -14,13 +14,13 @@ type Context = {
     gameStarted: boolean,
     setGameStarted: (value: boolean) => void,
     level: Level,
-    setLevel: (value: Level) => void,
+    setLevel: (value: LevelNames) => void,
     numberOfRemainingMines: number,
-    setNumberOfRemainingMines: (value: number) => void,
+    setNumberOfRemainingMines: (value: number | ((prevState: number) => number)) => void,
     bestTimes: BestTimes,
     setBestTimes: (value: BestTimes) => void,
     gameTime: number,
-    setGameTime: (value: number) => void,
+    setGameTime: (value: number | ((prevState: number) => number)) => void,
     resetGame: boolean,
     setResetGame: (value: boolean) => void
   }

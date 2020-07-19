@@ -27,6 +27,8 @@ const Cell: React.FC<Props> = ({   cellProps,
 
     const {gameOver, setGameOver, setNumberOfRemainingMines, resetGame} = useContext(GameContext)
 
+    let timerId: NodeJS.Timer;
+
     const renderCell = useCallback(() => {
         if(!cellProps.clicked && !cellProps.flagged) {setCellDisplay(null)}
         else if(cellProps.clicked && cellProps.mined && !cellProps.flagged) {setCellDisplay(Svgs.mine)}
@@ -58,7 +60,6 @@ const Cell: React.FC<Props> = ({   cellProps,
     }, [cellProps.flagged, cellProps.missFlagged, cellProps.mined, cellProps.clicked, renderCell, setNumberOfRemainingMines])
 
     useEffect(() => {
-        let timerId: NodeJS.Timer;
         if (startLongPress) {
           timerId = setTimeout(toggleFlag, 1000);
         } else {
@@ -90,7 +91,7 @@ const Cell: React.FC<Props> = ({   cellProps,
         }   
     }
 
-    const handleRightClick = (e) => {
+    const handleRightClick = (e: React.MouseEvent): void => {
         e.preventDefault()
         toggleFlag() 
     }

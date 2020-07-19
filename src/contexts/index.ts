@@ -1,5 +1,5 @@
 import {createContext} from 'react'
-import {LevelNames, LevelsEnum} from '../utils/index'
+import {LevelNames, LevelsEnum} from '../utils'
 
 const value: Context = {
   gameOver: false,
@@ -11,7 +11,7 @@ const value: Context = {
   level: LevelNames.BEGINNER,
   setLevel: ()=>{},
   numberOfRemainingMines: LevelsEnum[LevelNames.BEGINNER].numberOfMines,
-  setNumberOfRemainingMines: ()=>{},
+  setNumberOfRemainingMines: () => {},
   bestTimes: {BEGINNER: 999, INTERMEDIATE: 999, EXPERT: 999},
   setBestTimes: ()=>{},
   gameTime: 0,

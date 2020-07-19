@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default Object.freeze({
-    mine: <svg viewBox="-150 -150 809.696 809.696" style={{enableBackground: "new 0 0 509.696 509.696"}}>
+const Svgs:{[index: string ]: JSX.Element} = Object.freeze({
+    mine: <svg viewBox="-150 -150 809.696 809.696">
         <g>
             <g>
                 <path fill="#FC495C" d="M496.597,242.347l-28.843-7.595c-3.477-0.927-7.108-1.131-10.667-0.597c-3.667-28.623-13.571-56.092-29.013-80.469
@@ -67,7 +67,7 @@ export default Object.freeze({
         <g>
         </g>
         </svg>,
-    flag: <svg viewBox="-200 -200 912 912" style={{enableBackground:"new 0 0 512 512"}}>
+    flag: <svg viewBox="-200 -200 912 912">
         <path fill="#FC495C" d="M427.155,206l37.772-94.429c1.849-4.622,1.284-9.859-1.506-13.98C460.63,93.469,455.977,91,451,91
             H261c-8.284,0-15,6.716-15,15v135h-35c-8.284,0-15,6.716-15,15v50c0,8.284,6.716,15,15,15h240c4.978,0,9.63-2.469,12.421-6.591
             c2.791-4.121,3.355-9.358,1.506-13.98L427.155,206z"/>
@@ -109,7 +109,7 @@ export default Object.freeze({
         <g>
         </g>
         </svg>,
-    crossedFlag: <svg viewBox="-200 -200 912 912" style={{enableBackground:"new 0 0 512 512"}}>
+    crossedFlag: <svg viewBox="-200 -200 912 912">
     <path fill="#FC495C" d="M427.155,206l37.772-94.429c1.849-4.622,1.284-9.859-1.506-13.98C460.63,93.469,455.977,91,451,91
         H261c-8.284,0-15,6.716-15,15v135h-35c-8.284,0-15,6.716-15,15v50c0,8.284,6.716,15,15,15h240c4.978,0,9.63-2.469,12.421-6.591
         c2.791-4.121,3.355-9.358,1.506-13.98L427.155,206z"/>
@@ -285,3 +285,5 @@ export default Object.freeze({
         </svg>
    
 })
+
+export default Svgs
