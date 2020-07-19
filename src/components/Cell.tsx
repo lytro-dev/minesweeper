@@ -2,9 +2,10 @@ import React, {useState, useEffect, useCallback, useContext} from 'react'
 
 import {Svgs} from '../utils'
 import {GameContext} from '../contexts'
+import { CellType } from '../types'
 
 type Props = {
-    cellProps: Cell,
+    cellProps: CellType,
     firstCellClicked: boolean,
     distributeMines: () => void,
     revealAllMines: () => void,

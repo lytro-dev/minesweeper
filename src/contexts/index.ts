@@ -1,5 +1,6 @@
-import {createContext} from 'react'
 import {LevelNames, LevelsEnum} from '../utils'
+import { createContext } from 'react'
+import { Context } from '../types'
 
 const value: Context = {
   gameOver: false,

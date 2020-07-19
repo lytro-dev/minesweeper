@@ -1,5 +1,5 @@
 import CellObj from './CellObj'
-import {LevelsEnum, LevelNames} from './LevelsEnum'
+import {LevelsEnum, LevelNames} from './Levels'
 import Svgs from './Svgs'
 
 export {

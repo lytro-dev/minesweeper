@@ -3,10 +3,11 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Cell } from './'
 import { CellObj, LevelsEnum, LevelNames } from '../utils'
 import { GameContext } from '../contexts'
+import { CellType } from '../types'
 
 const MineField: React.FC = () => {
     const [firstCellClicked, setFirstCellClicked] = useState(false)
-    const [mineFieldArray, setMineFieldArray] = useState<Cell[][]>([])
+    const [mineFieldArray, setMineFieldArray] = useState<CellType[][]>([])
     const {setGameOver, setGameWon, resetGame, level} = useContext(GameContext)
     
     useEffect(()=>{
@@ -46,9 +47,9 @@ const MineField: React.FC = () => {
     }
 
     const buildMineFieldArray = (): void => {
-        const mineFieldArray: Cell[][] = []
+        const mineFieldArray: CellType[][] = []
         for(let y = 0; y <LevelsEnum[level].height; y++) {
-            let rowArray: Cell[] = []
+            let rowArray: CellType[] = []
             for(let x = 0; x < LevelsEnum[level].width; x++){    
                 rowArray.push(new CellObj(x, y))
                 
@@ -164,7 +165,7 @@ const MineField: React.FC = () => {
         checkIfWon()
     }
 
-    const handleAutoClick = (x: number, y: number, mineFieldArrayCopy: Cell[][]): void => {
+    const handleAutoClick = (x: number, y: number, mineFieldArrayCopy: CellType[][]): void => {
         mineFieldArrayCopy[y][x].clicked = true
         if(mineFieldArrayCopy[y][x].mined) {
             setGameOver(true)

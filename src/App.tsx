@@ -4,6 +4,7 @@ import './App.css'
 import {Main} from './containers'
 import {GameContext} from './contexts'
 import {LevelsEnum, LevelNames} from './utils'
+import { BestTimes, Context } from './types'
 
 const App: React.FC = () => {
   const [gameOver, setGameOver] = useState(false)

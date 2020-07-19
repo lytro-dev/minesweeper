@@ -1,3 +1,5 @@
+import {LevelNames} from './utils'
+
 type BestTimes = {
     BEGINNER: number,
     INTERMEDIATE: number,
@@ -25,7 +27,7 @@ type Context = {
     setResetGame: (value: boolean) => void
   }
 
-  type Cell = {
+  type CellType = {
       xCoordinate: number,
       yCoordinate: number,
       mined: boolean,

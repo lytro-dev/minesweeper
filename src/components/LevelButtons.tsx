@@ -7,7 +7,7 @@ const LevelButtons = () => {
 
     const {setLevel, setResetGame, setGameOver, setGameWon, setNumberOfRemainingMines} = useContext(GameContext)
 
-    const handleLevelClick = (level: Level): void => {
+    const handleLevelClick = (level: LevelNames): void => {
         setLevel(level)
         setNumberOfRemainingMines(LevelsEnum[level].numberOfMines)
         setResetGame(true)
