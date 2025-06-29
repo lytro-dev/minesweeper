@@ -18,7 +18,7 @@ const EndView: React.FC = () => {
         return <>
             <div className="title-text">{failMessages[Math.floor(Math.random()*failMessages.length)]}</div>
         </> 
-    }, [gameWon, gameOver])
+    }, [gameWon, gameOver, successMessages, failMessages])
 
     return(<div className="end-view">
         {renderMessage}  

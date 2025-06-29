@@ -10,10 +10,23 @@ const MineField: React.FC = () => {
     const [mineFieldArray, setMineFieldArray] = useState<CellType[][]>([])
     const {setGameOver, setGameWon, resetGame, level} = useContext(GameContext)
     
+    const buildMineFieldArray = (): void => {
+        const mineFieldArray: CellType[][] = []
+        for(let y = 0; y <LevelsEnum[level].height; y++) {
+            let rowArray: CellType[] = []
+            for(let x = 0; x < LevelsEnum[level].width; x++){    
+                rowArray.push(new CellObj(x, y))
+                
+            }
+            mineFieldArray.push(rowArray)
+        }
+        setMineFieldArray(mineFieldArray)
+    }
+
     useEffect(()=>{
         buildMineFieldArray()
         setFirstCellClicked(false)
-    }, [resetGame])
+    }, [resetGame, buildMineFieldArray])
 
     const distributeMines = (): void => {
         let numberOfMinesToDistribute: number = LevelsEnum[level].numberOfMines
@@ -44,19 +57,6 @@ const MineField: React.FC = () => {
         })
         setMineFieldArray(mineFieldArrayCopy)
         setFirstCellClicked(true)
-    }
-
-    const buildMineFieldArray = (): void => {
-        const mineFieldArray: CellType[][] = []
-        for(let y = 0; y <LevelsEnum[level].height; y++) {
-            let rowArray: CellType[] = []
-            for(let x = 0; x < LevelsEnum[level].width; x++){    
-                rowArray.push(new CellObj(x, y))
-                
-            }
-            mineFieldArray.push(rowArray)
-        }
-        setMineFieldArray(mineFieldArray)
     }
 
     const revealAllMines = (): void => {

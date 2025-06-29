@@ -31,7 +31,7 @@ const StatsDisplay: React.FC = () => {
         }, 1000)
         }   
         return () => {if(interval) clearInterval(interval)}
-    }, [gameOver, gameWon])
+    }, [gameOver, gameWon, time, setGameTime, setBestTimes, bestTimes, level, setResetGame])
 
 
     return(<div className="stats-display">

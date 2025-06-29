@@ -36,7 +36,7 @@ const Cell: React.FC<Props> = ({   cellProps,
         else if(cellProps.missFlagged && gameOver) {setCellDisplay(Svgs.crossedFlag)}
         else if(cellProps.flagged) {setCellDisplay(Svgs.flag)}
         else if(cellProps.clicked && !cellProps.mined) {setCellDisplay(Svgs[cellProps.numberOfNeighboringMines])}
-    },[cellProps.clicked, cellProps.mined, cellProps.numberOfNeighboringMines, cellProps.flagged, cellProps.missFlagged, gameOver])
+    },[cellProps.clicked, cellProps.mined, cellProps.numberOfNeighboringMines, cellProps.flagged, cellProps.missFlagged, gameOver, setCellDisplay])
 
     useEffect(()=>{
         setSteppedOnMine(false)
@@ -70,7 +70,7 @@ const Cell: React.FC<Props> = ({   cellProps,
         return () => {
           if(timerId) clearTimeout(timerId);
         };
-      }, [startLongPress]);
+      }, [startLongPress, toggleFlag]);
 
     const handleCellClick = () => {
         if(!gameOver && !cellProps.flagged) {
