@@ -15,7 +15,7 @@ type Context = {
     setGameWon: (value: boolean) => void,
     gameStarted: boolean,
     setGameStarted: (value: boolean) => void,
-    level: Level,
+    level: LevelNames,
     setLevel: (value: LevelNames) => void,
     numberOfRemainingMines: number,
     setNumberOfRemainingMines: (value: number | ((prevState: number) => number)) => void,
@@ -37,3 +37,10 @@ type Context = {
       checkedForNeighboringMines: boolean,
       numberOfNeighboringMines: number
   }
+
+export type {
+    BestTimes,
+    Level,
+    Context,
+    CellType
+}
